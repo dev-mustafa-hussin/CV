@@ -3,6 +3,7 @@ import AnimatedBackground from '@/components/AnimatedBackground';
 import ProjectCard from '@/components/ProjectCard';
 import BackButton from '@/components/BackButton';
 import StatItem from '@/components/StatItem';
+import SEO from '@/components/SEO';
 import { projects } from '@/data/projects';
 import { Search, Filter, X, Grid, List } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -58,8 +59,15 @@ const Projects = () => {
   const hasActiveFilters = searchQuery || selectedCategory || selectedTech;
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <AnimatedBackground />
+    <>
+      <SEO 
+        title="مشاريعي"
+        description="استعرض مجموعة من أبرز المشاريع التي قمت بتطويرها باستخدام Flutter و React Native وأحدث التقنيات."
+        url="https://cv.3mcode-solutions.com/projects"
+        keywords="مشاريع, Flutter projects, تطبيقات موبايل, portfolio, أعمال سابقة"
+      />
+      <div className="min-h-screen relative overflow-hidden">
+        <AnimatedBackground />
 
       <main className="relative z-10 container mx-auto px-4 py-8">
         {/* Back button */}
@@ -229,7 +237,8 @@ const Projects = () => {
           </div>
         )}
       </main>
-    </div>
+      </div>
+    </>
   );
 };
 

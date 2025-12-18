@@ -1,5 +1,6 @@
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
+import SEO from '@/components/SEO';
 import { Code, Smartphone, Database, Palette, Globe, Zap } from 'lucide-react';
 
 const skills = [
@@ -61,7 +62,14 @@ const skills = [
 
 const Skills = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <>
+      <SEO 
+        title="مهاراتي"
+        description="تعرف على المهارات التقنية لأكرم عطية - Flutter, React Native, Dart, Firebase, Supabase والمزيد."
+        url="https://cv.3mcode-solutions.com/skills"
+        keywords="مهارات, Flutter skills, React Native, تقنيات, programming skills"
+      />
+      <div className="min-h-screen relative overflow-hidden">
       <AnimatedBackground />
 
       <main className="relative z-10 container mx-auto px-4 py-8">
@@ -123,7 +131,8 @@ const Skills = () => {
           ))}
         </div>
       </main>
-    </div>
+      </div>
+    </>
   );
 };
 
