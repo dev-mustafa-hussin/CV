@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Mail, Target, Briefcase, FileText, HelpCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Mail, Target, Briefcase, FileText, HelpCircle, Sparkles } from 'lucide-react';
 
 interface NavigationCardProps {
   title: string;
   description: string;
-  icon: 'mail' | 'target' | 'briefcase' | 'file' | 'help';
+  icon: 'mail' | 'target' | 'briefcase' | 'file' | 'help' | 'service';
   link: string;
   onPrev?: () => void;
   onNext?: () => void;
@@ -18,6 +18,7 @@ const iconMap = {
   briefcase: Briefcase,
   file: FileText,
   help: HelpCircle,
+  service: Sparkles,
 };
 
 const NavigationCard = ({
