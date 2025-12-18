@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import TechBadge from '@/components/TechBadge';
-import { projects } from '@/data/projects';
-import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { projects, ProjectStat } from '@/data/projects';
+import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp } from 'lucide-react';
 
 // Import screenshots
 import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
@@ -21,6 +21,15 @@ const iconMap = {
   shopping: ShoppingBag,
   chat: MessageCircle,
   social: Users,
+};
+
+const statIconMap = {
+  users: Users,
+  downloads: Download,
+  star: Star,
+  code: Code,
+  clock: Clock,
+  update: RefreshCw,
 };
 
 const screenshotMap: Record<string, string> = {
@@ -98,6 +107,30 @@ const ProjectDetail = () => {
             </div>
           </div>
         </div>
+
+        {/* Stats Section */}
+        {project.stats && project.stats.length > 0 && (
+          <section className="mb-8 animate-slide-up" style={{ animationDelay: '0.15s' }}>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {project.stats.map((stat, index) => {
+                const StatIcon = statIconMap[stat.icon];
+                return (
+                  <div
+                    key={index}
+                    className="card-glass p-4 text-center animate-fade-in hover:border-primary/30 transition-all duration-300"
+                    style={{ animationDelay: `${0.2 + index * 0.05}s` }}
+                  >
+                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-2">
+                      <StatIcon className="w-5 h-5 text-primary" />
+                    </div>
+                    <p className="text-xl md:text-2xl font-bold text-foreground">{stat.value}</p>
+                    <p className="text-xs md:text-sm text-muted-foreground">{stat.label}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
 
         {/* About Section */}
         <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>

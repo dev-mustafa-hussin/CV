@@ -1,3 +1,9 @@
+export interface ProjectStat {
+  icon: 'users' | 'downloads' | 'star' | 'code' | 'clock' | 'update';
+  value: string;
+  label: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -8,6 +14,7 @@ export interface Project {
   icon: 'shopping' | 'chat' | 'social';
   screenshot?: string;
   gallery?: string[];
+  stats?: ProjectStat[];
   technologies: {
     name: string;
     description: string;
@@ -41,6 +48,14 @@ export const projects: Project[] = [
       '/src/assets/projects/ecommerce-screenshot.png',
       '/src/assets/projects/ecommerce-cart.png',
       '/src/assets/projects/ecommerce-product.png',
+    ],
+    stats: [
+      { icon: 'users', value: '5,000+', label: 'مستخدم نشط' },
+      { icon: 'downloads', value: '12,500+', label: 'تحميل' },
+      { icon: 'star', value: '4.8', label: 'تقييم المتجر' },
+      { icon: 'code', value: '25,000+', label: 'سطر كود' },
+      { icon: 'clock', value: '3', label: 'أشهر تطوير' },
+      { icon: 'update', value: '15+', label: 'تحديث' },
     ],
     technologies: [
       { name: 'Flutter', description: 'تطوير مشاريع', percentage: 99 },
@@ -119,6 +134,14 @@ export const projects: Project[] = [
       '/src/assets/projects/chatapp-contacts.png',
       '/src/assets/projects/chatapp-group.png',
     ],
+    stats: [
+      { icon: 'users', value: '8,200+', label: 'مستخدم نشط' },
+      { icon: 'downloads', value: '20,000+', label: 'تحميل' },
+      { icon: 'star', value: '4.9', label: 'تقييم المتجر' },
+      { icon: 'code', value: '18,000+', label: 'سطر كود' },
+      { icon: 'clock', value: '2.5', label: 'أشهر تطوير' },
+      { icon: 'update', value: '22+', label: 'تحديث' },
+    ],
     technologies: [
       { name: 'Flutter', description: 'إطار العمل الأساسي', percentage: 99 },
       { name: 'Realtime Database', description: 'قاعدة بيانات لحظية', percentage: 97 },
@@ -177,6 +200,14 @@ export const projects: Project[] = [
       '/src/assets/projects/socialmedia-screenshot.png',
       '/src/assets/projects/socialmedia-profile.png',
       '/src/assets/projects/socialmedia-explore.png',
+    ],
+    stats: [
+      { icon: 'users', value: '15,000+', label: 'مستخدم نشط' },
+      { icon: 'downloads', value: '35,000+', label: 'تحميل' },
+      { icon: 'star', value: '4.7', label: 'تقييم المتجر' },
+      { icon: 'code', value: '32,000+', label: 'سطر كود' },
+      { icon: 'clock', value: '4', label: 'أشهر تطوير' },
+      { icon: 'update', value: '28+', label: 'تحديث' },
     ],
     technologies: [
       { name: 'Flutter', description: 'إطار العمل', percentage: 99 },
