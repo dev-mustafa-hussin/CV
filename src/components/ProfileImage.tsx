@@ -9,27 +9,25 @@ const ProfileImage = ({ size = 'lg', className = '' }: ProfileImageProps) => {
   const sizeClasses = {
     sm: 'w-32 h-32',
     md: 'w-56 h-56',
-    lg: 'w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96',
+    lg: 'w-72 h-72 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px]',
   };
 
   return (
     <div className={`relative ${className}`}>
       {/* Outer glow ring */}
-      <div className={`${sizeClasses[size]} rounded-full animate-pulse-glow absolute inset-0`} />
+      <div className={`${sizeClasses[size]} rounded-full absolute inset-0 blur-xl bg-primary/30`} />
       
       {/* Main image container */}
       <div
-        className={`${sizeClasses[size]} rounded-full border-4 border-primary relative overflow-hidden glow-border bg-card`}
+        className={`${sizeClasses[size]} rounded-full border-[6px] border-primary relative overflow-hidden`}
+        style={{ boxShadow: '0 0 60px hsl(252 100% 68% / 0.5), 0 0 100px hsl(252 100% 68% / 0.3)' }}
       >
         {/* Profile Image */}
         <img 
           src={profileImage} 
           alt="Akram Atiia" 
-          className="w-full h-full object-cover object-center scale-125"
+          className="w-full h-full object-cover object-top scale-110"
         />
-        
-        {/* Duotone overlay effect */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-info/5 mix-blend-overlay" />
       </div>
     </div>
   );
