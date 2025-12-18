@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
+import SEO from '@/components/SEO';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -34,8 +35,15 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <AnimatedBackground />
+    <>
+      <SEO 
+        title="اتصل بي"
+        description="تواصل مع أكرم عطية - مطور تطبيقات محترف. لديك مشروع في ذهنك؟ دعنا نتحدث ونحول فكرتك إلى حقيقة."
+        url="https://cv.3mcode-solutions.com/contact"
+        keywords="اتصل بي, تواصل, contact, hire developer, توظيف مطور"
+      />
+      <div className="min-h-screen relative overflow-hidden">
+        <AnimatedBackground />
 
       <main className="relative z-10 container mx-auto px-4 py-8">
         {/* Back button */}
@@ -161,7 +169,8 @@ const Contact = () => {
           </div>
         </div>
       </main>
-    </div>
+      </div>
+    </>
   );
 };
 

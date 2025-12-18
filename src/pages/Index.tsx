@@ -7,6 +7,7 @@ import NavigationCard from '@/components/NavigationCard';
 import FadeIn from '@/components/animations/FadeIn';
 import ScaleIn from '@/components/animations/ScaleIn';
 import StaggerContainer, { StaggerItem } from '@/components/animations/StaggerContainer';
+import SEO from '@/components/SEO';
 import { Github, Linkedin, MessageCircle } from 'lucide-react';
 
 const navItems = [
@@ -50,8 +51,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen min-h-[100dvh] relative overflow-hidden safe-area-top">
-      <AnimatedBackground />
+    <>
+      <SEO 
+        title="Akram Atiia | مطور تطبيقات محترف"
+        description="أكرم عطية - مطور تطبيقات محترف متخصص في Flutter و React Native. أطوّر حلولاً رقمية فريدة لا تُنسى. +3 مشاريع مكتملة، +15 تقنية، 100% رضا العملاء."
+        url="https://cv.3mcode-solutions.com/"
+      />
+      <div className="min-h-screen min-h-[100dvh] relative overflow-hidden safe-area-top">
+        <AnimatedBackground />
 
       {/* Floating Social Links - Desktop */}
       <motion.div 
@@ -232,7 +239,8 @@ const Index = () => {
           </StaggerContainer>
         </div>
       </main>
-    </div>
+      </div>
+    </>
   );
 };
 
