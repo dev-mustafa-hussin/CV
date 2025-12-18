@@ -5,10 +5,21 @@ import TechBadge from '@/components/TechBadge';
 import { projects } from '@/data/projects';
 import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud } from 'lucide-react';
 
+// Import screenshots
+import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
+import chatappScreenshot from '@/assets/projects/chatapp-screenshot.png';
+import socialmediaScreenshot from '@/assets/projects/socialmedia-screenshot.png';
+
 const iconMap = {
   shopping: ShoppingBag,
   chat: MessageCircle,
   social: Users,
+};
+
+const screenshotMap: Record<string, string> = {
+  ecommerce: ecommerceScreenshot,
+  chatapp: chatappScreenshot,
+  socialmedia: socialmediaScreenshot,
 };
 
 const ProjectDetail = () => {
@@ -24,6 +35,7 @@ const ProjectDetail = () => {
   }
 
   const IconComponent = iconMap[project.icon];
+  const screenshot = screenshotMap[project.id];
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -35,21 +47,31 @@ const ProjectDetail = () => {
           <BackButton to="/projects" label="المشاريع" />
         </div>
 
-        {/* Header */}
+        {/* Header with Screenshot */}
         <div className="card-glass p-8 mb-8 animate-slide-up">
-          <div className="flex flex-col md:flex-row-reverse items-center gap-6">
-            {/* Icon */}
-            <div className="w-28 h-28 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center
-                            glow-border flex-shrink-0">
-              <IconComponent className="w-12 h-12 text-primary" />
+          <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
+            {/* Screenshot */}
+            <div className="relative w-48 md:w-56 lg:w-64 flex-shrink-0">
+              <div className="relative rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20">
+                <img 
+                  src={screenshot} 
+                  alt={project.titleAr}
+                  className="w-full h-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
+              </div>
+              {/* Icon badge */}
+              <div className="absolute -bottom-3 -right-3 w-14 h-14 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center glow-border">
+                <IconComponent className="w-6 h-6 text-primary" />
+              </div>
             </div>
 
             {/* Title */}
-            <div className="text-center md:text-right flex-1">
-              <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+            <div className="text-center lg:text-right flex-1">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3">
                 {project.title} - {project.titleAr}
               </h1>
-              <span className="inline-block bg-info/20 text-info px-4 py-1.5 rounded-full">
+              <span className="inline-block bg-info/20 text-info px-4 py-1.5 rounded-full text-sm md:text-base">
                 {project.category}
               </span>
             </div>
