@@ -126,7 +126,7 @@ export const projects: Project[] = [
       'تطبيق سياسات RLS مفصلة لكل جدول',
       'دمج Stripe مع التحقق من الصحة من السيرفر',
     ],
-    videoUrl: 'https://www.youtube.com/watch?v=example',
+    videoUrl: 'https://www.youtube.com/watch?v=VPvVD8t02U8',
     timeline: [
       { date: 'يناير 2024', title: 'بداية المشروع', description: 'تحليل المتطلبات وتصميم واجهات المستخدم الأولية', status: 'completed' },
       { date: 'فبراير 2024', title: 'تطوير قاعدة البيانات', description: 'بناء مخطط قاعدة البيانات وإعداد Supabase', status: 'completed' },
@@ -201,7 +201,7 @@ export const projects: Project[] = [
       'تطبيق نظام Queue للرسائل المعلقة',
       'تحميل الرسائل بشكل تدريجي (Pagination)',
     ],
-    videoUrl: 'https://www.youtube.com/watch?v=chatapp-demo',
+    videoUrl: 'https://www.youtube.com/watch?v=wHIcJDQbBFs',
     timeline: [
       { date: 'مارس 2024', title: 'التخطيط والتصميم', description: 'دراسة السوق وتصميم تجربة المستخدم', status: 'completed' },
       { date: 'أبريل 2024', title: 'بناء البنية التحتية', description: 'إعداد Supabase Realtime والمصادقة', status: 'completed' },
@@ -276,7 +276,7 @@ export const projects: Project[] = [
       'تصميم قاعدة بيانات محسنة للعلاقات',
       'تطبيق Infinite Scroll مع Caching',
     ],
-    videoUrl: 'https://www.youtube.com/watch?v=socialmedia-demo',
+    videoUrl: 'https://www.youtube.com/watch?v=BBccK1zTgxw',
     timeline: [
       { date: 'فبراير 2024', title: 'البحث والتحليل', description: 'تحليل المنافسين وتحديد المميزات الأساسية', status: 'completed' },
       { date: 'مارس 2024', title: 'التصميم والنماذج', description: 'تصميم واجهات المستخدم وتجربة الاستخدام', status: 'completed' },
@@ -351,6 +351,7 @@ export const projects: Project[] = [
       'بناء تقويم مخصص باستخدام CustomPainter',
       'تطبيق نظام Conflict Resolution للمزامنة',
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=HQ_ytw58tC4',
     timeline: [
       { date: 'سبتمبر 2024', title: 'التخطيط والتصميم', description: 'تحليل احتياجات المستخدمين وتصميم UX/UI', status: 'completed' },
       { date: 'أكتوبر 2024', title: 'تطوير النظام الأساسي', description: 'بناء نظام المهام والتصنيفات', status: 'completed' },
@@ -423,6 +424,7 @@ export const projects: Project[] = [
       'قاعدة بيانات غذائية شاملة مع ML',
       'خوارزميات تعلم آلي للتوصيات',
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=1ukSR1GRtMU',
     timeline: [
       { date: 'يونيو 2024', title: 'البحث والتحليل', description: 'دراسة السوق واحتياجات المستخدمين', status: 'completed' },
       { date: 'يوليو 2024', title: 'التصميم', description: 'تصميم الواجهات وتجربة المستخدم', status: 'completed' },
@@ -498,6 +500,7 @@ export const projects: Project[] = [
       'محرك اختبارات قابل للتخصيص',
       'لوحة تحكم شاملة للمعلمين',
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=pTFZFxd4hOI',
     timeline: [
       { date: 'أبريل 2024', title: 'التخطيط', description: 'تحديد المتطلبات وتصميم البنية', status: 'completed' },
       { date: 'مايو 2024', title: 'نظام الدورات', description: 'بناء نظام إدارة الدورات والدروس', status: 'completed' },
@@ -574,6 +577,7 @@ export const projects: Project[] = [
       'بناء ثلاثة تطبيقات متكاملة',
       'خوارزمية ذكية تراعي الموقع والتوفر',
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=x0uinJvhNxI',
     timeline: [
       { date: 'مايو 2024', title: 'التحليل والتصميم', description: 'دراسة السوق وتصميم التجربة', status: 'completed' },
       { date: 'يونيو 2024', title: 'تطبيق العملاء', description: 'تطوير تطبيق الطلبات للعملاء', status: 'completed' },
@@ -649,6 +653,7 @@ export const projects: Project[] = [
       'ضغط وتجزئة الخرائط بذكاء',
       'تحسين AR للأجهزة المختلفة',
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=CzRQ9mnmh44',
     timeline: [
       { date: 'يوليو 2024', title: 'التخطيط', description: 'تحليل السوق وتحديد المميزات', status: 'completed' },
       { date: 'أغسطس 2024', title: 'نظام الحجز', description: 'تكامل APIs الفنادق والطيران', status: 'completed' },
@@ -723,6 +728,7 @@ export const projects: Project[] = [
       'استخدام ML للتصنيف التلقائي',
       'خوارزميات تحليل الأنماط المالية',
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=W1pNjxmNHNQ',
     timeline: [
       { date: 'أغسطس 2024', title: 'التصميم', description: 'تصميم الواجهات وتجربة المستخدم', status: 'completed' },
       { date: 'سبتمبر 2024', title: 'النظام الأساسي', description: 'بناء نظام المعاملات والتصنيفات', status: 'completed' },

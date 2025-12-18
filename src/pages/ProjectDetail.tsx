@@ -378,19 +378,34 @@ const ProjectDetail = () => {
               <span>فيديو توضيحي للمشروع</span>
             </h2>
             <div className="bg-card/50 rounded-2xl border border-border/30 overflow-hidden">
-              <a
-                href={project.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block aspect-video flex items-center justify-center bg-background/50 hover:bg-background/70 transition-colors cursor-pointer group"
-              >
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Play className="w-8 h-8 text-primary-foreground mr-[-4px]" />
-                  </div>
-                  <p className="text-primary font-medium">اضغط لمشاهدة الفيديو</p>
+              {project.videoUrl.includes('youtube.com') || project.videoUrl.includes('youtu.be') ? (
+                <div className="aspect-video">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={project.videoUrl.replace('watch?v=', 'embed/').replace('youtu.be/', 'youtube.com/embed/')}
+                    title={`${project.titleAr} - فيديو توضيحي`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                    className="rounded-2xl"
+                  />
                 </div>
-              </a>
+              ) : (
+                <a
+                  href={project.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block aspect-video flex items-center justify-center bg-background/50 hover:bg-background/70 transition-colors cursor-pointer group"
+                >
+                  <div className="text-center">
+                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <Play className="w-8 h-8 text-primary-foreground mr-[-4px]" />
+                    </div>
+                    <p className="text-primary font-medium">اضغط لمشاهدة الفيديو</p>
+                  </div>
+                </a>
+              )}
             </div>
           </section>
         )}
