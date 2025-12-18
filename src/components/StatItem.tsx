@@ -6,10 +6,10 @@ interface StatItemProps {
 
 const StatItem = ({ value, label, emoji }: StatItemProps) => {
   return (
-    <div className="stat-card flex-row-reverse">
-      {emoji && <span>{emoji}</span>}
-      <span>{label}</span>
-      <span className="text-foreground font-semibold">{value}</span>
+    <div className="flex items-center gap-2 text-sm md:text-base">
+      {emoji && <span className="text-lg">{emoji}</span>}
+      <span className="text-muted-foreground">{label}</span>
+      <span className="text-foreground font-bold">{value}</span>
     </div>
   );
 };
