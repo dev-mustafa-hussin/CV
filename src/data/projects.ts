@@ -121,6 +121,23 @@ export const projects: Project[] = [
       'إشعارات فورية',
       'تشفير المحادثات',
     ],
+    supabaseFeatures: [
+      { name: 'Realtime Database', nameAr: 'قاعدة بيانات لحظية' },
+      { name: 'Cloud Firestore', nameAr: 'تخزين البيانات السحابي' },
+      { name: 'Firebase Authentication', nameAr: 'مصادقة متعددة الخيارات' },
+      { name: 'Cloud Storage', nameAr: 'تخزين الوسائط المتعددة' },
+      { name: 'Cloud Messaging (FCM)', nameAr: 'الإشعارات الفورية' },
+      { name: 'Security Rules', nameAr: 'قواعد الأمان والصلاحيات' },
+    ],
+    databaseSchema: [
+      { name: 'users', nameAr: 'جدول المستخدمين' },
+      { name: 'chats', nameAr: 'المحادثات' },
+      { name: 'messages', nameAr: 'الرسائل' },
+      { name: 'groups', nameAr: 'المجموعات' },
+      { name: 'group_members', nameAr: 'أعضاء المجموعات' },
+      { name: 'media', nameAr: 'الوسائط المرفقة' },
+      { name: 'notifications', nameAr: 'الإشعارات' },
+    ],
     challenges: [
       'ضمان تسليم الرسائل بشكل فوري',
       'إدارة حالة الاتصال والانقطاع',
@@ -131,6 +148,7 @@ export const projects: Project[] = [
       'تطبيق نظام Queue للرسائل المعلقة',
       'تحميل الرسائل بشكل تدريجي (Pagination)',
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=chatapp-demo',
   },
   {
     id: 'socialmedia',
@@ -156,6 +174,24 @@ export const projects: Project[] = [
       'رسائل خاصة ومجموعات',
       'إشعارات ذكية',
     ],
+    supabaseFeatures: [
+      { name: 'REST API Integration', nameAr: 'تكامل واجهات برمجية' },
+      { name: 'State Management (Bloc/Provider)', nameAr: 'إدارة حالة التطبيق' },
+      { name: 'Local Caching', nameAr: 'التخزين المؤقت المحلي' },
+      { name: 'Image Compression', nameAr: 'ضغط الصور والوسائط' },
+      { name: 'Pagination System', nameAr: 'نظام التحميل التدريجي' },
+      { name: 'Offline Support', nameAr: 'دعم العمل بدون اتصال' },
+    ],
+    databaseSchema: [
+      { name: 'users', nameAr: 'جدول المستخدمين' },
+      { name: 'posts', nameAr: 'المنشورات' },
+      { name: 'comments', nameAr: 'التعليقات' },
+      { name: 'likes', nameAr: 'الإعجابات' },
+      { name: 'followers', nameAr: 'المتابعين' },
+      { name: 'stories', nameAr: 'القصص' },
+      { name: 'messages', nameAr: 'الرسائل الخاصة' },
+      { name: 'hashtags', nameAr: 'الهاشتاقات' },
+    ],
     challenges: [
       'بناء نظام Feed ديناميكي وسريع',
       'إدارة العلاقات بين المستخدمين',
@@ -166,5 +202,6 @@ export const projects: Project[] = [
       'تصميم قاعدة بيانات محسنة للعلاقات',
       'تطبيق Infinite Scroll مع Caching',
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=socialmedia-demo',
   },
 ];
