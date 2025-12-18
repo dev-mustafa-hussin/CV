@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShoppingBag, MessageCircle, Users } from 'lucide-react';
+import { ArrowRight, ShoppingBag, MessageCircle, Users, CheckSquare, Dumbbell, GraduationCap, UtensilsCrossed, Plane } from 'lucide-react';
 
 interface ProjectCardProps {
   id: string;
@@ -8,13 +8,18 @@ interface ProjectCardProps {
   category: string;
   description: string;
   technologies: string[];
-  icon: 'shopping' | 'chat' | 'social';
+  icon: 'shopping' | 'chat' | 'social' | 'task' | 'fitness' | 'education' | 'food' | 'travel';
 }
 
 const iconMap = {
   shopping: ShoppingBag,
   chat: MessageCircle,
   social: Users,
+  task: CheckSquare,
+  fitness: Dumbbell,
+  education: GraduationCap,
+  food: UtensilsCrossed,
+  travel: Plane,
 };
 
 const ProjectCard = ({
