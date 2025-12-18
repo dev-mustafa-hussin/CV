@@ -8,6 +8,7 @@ const navItems = [
   { title: 'مشاريعي', description: 'أعمالي المبدعة', icon: 'briefcase' as const, link: '/projects' },
   { title: 'مهاراتي', description: 'قدرات الخاصة', icon: 'target' as const, link: '/skills' },
   { title: 'اتصل بي', description: 'لعمل إدارتي', icon: 'mail' as const, link: '/contact' },
+  { title: 'سيرتي الذاتية', description: 'CV تفاعلي', icon: 'file' as const, link: '/resume' },
 ];
 
 const Index = () => {
@@ -67,7 +68,7 @@ const Index = () => {
           </div>
 
           {/* Desktop: Show all cards */}
-          <div className="hidden md:grid md:grid-cols-3 gap-4 lg:gap-6">
+          <div className="hidden md:grid md:grid-cols-4 gap-4 lg:gap-6">
             {navItems.map((item) => (
               <NavigationCard
                 key={item.title}
