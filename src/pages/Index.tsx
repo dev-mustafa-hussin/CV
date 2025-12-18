@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import ProfileImage from '@/components/ProfileImage';
 import StatItem from '@/components/StatItem';
 import NavigationCard from '@/components/NavigationCard';
+import FadeIn from '@/components/animations/FadeIn';
+import ScaleIn from '@/components/animations/ScaleIn';
+import StaggerContainer, { StaggerItem } from '@/components/animations/StaggerContainer';
 import { Github, Linkedin, MessageCircle } from 'lucide-react';
 
 const navItems = [
@@ -50,77 +54,116 @@ const Index = () => {
       <AnimatedBackground />
 
       {/* Floating Social Links - Desktop */}
-      <div className="hidden lg:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col gap-4 z-20 animate-fade-in" style={{ animationDelay: '1s' }}>
-        {socialLinks.map((social) => (
-          <a
+      <motion.div 
+        className="hidden lg:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col gap-4 z-20"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.2, duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+      >
+        {socialLinks.map((social, index) => (
+          <motion.a
             key={social.label}
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
             className={`w-12 h-12 rounded-full bg-card/80 backdrop-blur-sm border border-primary/30 
                        flex items-center justify-center text-muted-foreground ${social.color}
-                       hover:border-primary hover:scale-110 hover:shadow-[0_0_20px_hsl(252_100%_68%_/_0.3)]
+                       hover:border-primary hover:shadow-[0_0_20px_hsl(252_100%_68%_/_0.3)]
                        transition-all duration-300`}
             aria-label={social.label}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.3 + index * 0.1, duration: 0.4, type: 'spring', stiffness: 200 }}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.95 }}
           >
             <social.icon className="w-5 h-5" />
-          </a>
+          </motion.a>
         ))}
-      </div>
+      </motion.div>
 
       <main className="relative z-10 container mx-auto px-4 py-6 sm:py-8 md:py-12 lg:py-16">
         {/* Hero Section */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 min-h-[45vh] sm:min-h-[50vh] lg:min-h-[60vh]">
           {/* Profile Image - Shows first on mobile */}
-          <div className="animate-fade-in flex-shrink-0 order-first lg:order-last" style={{ animationDelay: '0.2s' }}>
+          <ScaleIn delay={0.2} className="flex-shrink-0 order-first lg:order-last">
             <ProfileImage />
-          </div>
+          </ScaleIn>
 
           {/* Content */}
           <div className="text-center lg:text-right flex-1 max-w-xl">
-            <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
-              <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-2 sm:mb-4">
+            <FadeIn delay={0.3} direction="up">
+              <motion.h1 
+                className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-2 sm:mb-4"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
+              >
                 Akram Atiia
-              </h1>
-              <h2 className="text-lg xs:text-xl md:text-2xl text-primary font-medium mb-2 sm:mb-4">
+              </motion.h1>
+              <motion.h2 
+                className="text-lg xs:text-xl md:text-2xl text-primary font-medium mb-2 sm:mb-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+              >
                 مطور تطبيقات
-              </h2>
-              <p className="text-muted-foreground text-sm xs:text-base md:text-lg mb-6 sm:mb-8 px-2 sm:px-0">
+              </motion.h2>
+              <motion.p 
+                className="text-muted-foreground text-sm xs:text-base md:text-lg mb-6 sm:mb-8 px-2 sm:px-0"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+              >
                 أطوّر حلولاً رقمية فريدة لا تُنسى
-              </p>
-            </div>
+              </motion.p>
+            </FadeIn>
 
             {/* Stats */}
-            <div className="flex flex-wrap items-center gap-3 xs:gap-4 md:gap-6 justify-center lg:justify-start animate-slide-up" style={{ animationDelay: '0.5s' }}>
-              <StatItem value="100%" label="رضا المقرر" emoji="👍" />
-              <StatItem value="+15" label="تكنولوجيا مستخدمة" />
-              <StatItem value="+3" label="مشروع مكتمل" emoji="💼" />
-            </div>
+            <StaggerContainer delay={0.7} staggerDelay={0.1} className="flex flex-wrap items-center gap-3 xs:gap-4 md:gap-6 justify-center lg:justify-start">
+              <StaggerItem>
+                <StatItem value="100%" label="رضا المقرر" emoji="👍" />
+              </StaggerItem>
+              <StaggerItem>
+                <StatItem value="+15" label="تكنولوجيا مستخدمة" />
+              </StaggerItem>
+              <StaggerItem>
+                <StatItem value="+3" label="مشروع مكتمل" emoji="💼" />
+              </StaggerItem>
+            </StaggerContainer>
 
             {/* Social Links - Mobile & Tablet */}
-            <div className="flex lg:hidden items-center justify-center lg:justify-start gap-3 mt-6 animate-slide-up" style={{ animationDelay: '0.6s' }}>
+            <StaggerContainer delay={0.9} staggerDelay={0.1} className="flex lg:hidden items-center justify-center lg:justify-start gap-3 mt-6">
               {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-11 h-11 rounded-full bg-card/80 border border-primary/30 
-                             flex items-center justify-center text-muted-foreground ${social.color}
-                             hover:border-primary active:scale-95 transition-all duration-300`}
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
+                <StaggerItem key={social.label}>
+                  <motion.a
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-11 h-11 rounded-full bg-card/80 border border-primary/30 
+                               flex items-center justify-center text-muted-foreground ${social.color}
+                               hover:border-primary transition-all duration-300`}
+                    aria-label={social.label}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </motion.a>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </div>
 
         {/* Navigation Cards */}
-        <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 animate-slide-up safe-area-bottom" style={{ animationDelay: '0.7s' }}>
+        <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 safe-area-bottom">
           {/* Mobile: Show one card at a time with dots indicator */}
-          <div className="block md:hidden px-4">
+          <motion.div 
+            className="block md:hidden px-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
             <NavigationCard
               {...navItems[currentNavIndex]}
               onPrev={handlePrev}
@@ -129,53 +172,64 @@ const Index = () => {
             {/* Dots indicator */}
             <div className="flex justify-center gap-2 mt-4">
               {navItems.map((_, index) => (
-                <button
+                <motion.button
                   key={index}
                   onClick={() => setCurrentNavIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  className={`h-2 rounded-full transition-all duration-300 ${
                     index === currentNavIndex 
                       ? 'bg-primary w-6' 
-                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50 w-2'
                   }`}
                   aria-label={`انتقل إلى ${navItems[index].title}`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
                 />
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Tablet: Show 3 cards */}
-          <div className="hidden md:grid lg:hidden grid-cols-3 gap-4">
-            {navItems.slice(0, 3).map((item) => (
-              <NavigationCard
-                key={item.title}
-                {...item}
-                showPrev={false}
-                showNext={false}
-              />
-            ))}
-            <div className="col-span-3 grid grid-cols-2 gap-4 mt-2">
-              {navItems.slice(3).map((item) => (
-                <NavigationCard
-                  key={item.title}
-                  {...item}
-                  showPrev={false}
-                  showNext={false}
-                />
+          <div className="hidden md:block lg:hidden">
+            <StaggerContainer delay={1} staggerDelay={0.1} className="grid grid-cols-3 gap-4">
+              {navItems.slice(0, 3).map((item) => (
+                <StaggerItem key={item.title}>
+                  <NavigationCard
+                    {...item}
+                    showPrev={false}
+                    showNext={false}
+                  />
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
+            <StaggerContainer delay={1.3} staggerDelay={0.1} className="grid grid-cols-2 gap-4 mt-4">
+              {navItems.slice(3).map((item) => (
+                <StaggerItem key={item.title}>
+                  <NavigationCard
+                    {...item}
+                    showPrev={false}
+                    showNext={false}
+                  />
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
           </div>
 
           {/* Desktop: Show all 5 cards */}
-          <div className="hidden lg:grid grid-cols-5 gap-4 xl:gap-6">
+          <StaggerContainer delay={1} staggerDelay={0.1} className="hidden lg:grid grid-cols-5 gap-4 xl:gap-6">
             {navItems.map((item) => (
-              <NavigationCard
-                key={item.title}
-                {...item}
-                showPrev={false}
-                showNext={false}
-              />
+              <StaggerItem key={item.title}>
+                <motion.div
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                >
+                  <NavigationCard
+                    {...item}
+                    showPrev={false}
+                    showNext={false}
+                  />
+                </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </main>
     </div>
