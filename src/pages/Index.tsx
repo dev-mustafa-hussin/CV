@@ -8,7 +8,7 @@ import FadeIn from '@/components/animations/FadeIn';
 import ScaleIn from '@/components/animations/ScaleIn';
 import StaggerContainer, { StaggerItem } from '@/components/animations/StaggerContainer';
 import SEO from '@/components/SEO';
-import { Github, Linkedin, MessageCircle } from 'lucide-react';
+import { Github, Linkedin, MessageCircle, RefreshCw } from 'lucide-react';
 
 const navItems = [
   { title: 'خدماتي', description: 'الباقات والأسعار', icon: 'service' as const, link: '/services' },
@@ -91,6 +91,17 @@ const Index = () => {
       </motion.div>
 
       <main className="relative z-10 container mx-auto px-4 py-6 sm:py-8 md:py-12 lg:py-16">
+        {/* GitHub Sync Badge */}
+        <motion.div
+          className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-success/10 border border-success/30 text-success text-xs sm:text-sm"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5, duration: 0.4 }}
+        >
+          <RefreshCw className="w-3 h-3 sm:w-4 sm:h-4 animate-spin" style={{ animationDuration: '3s' }} />
+          <span>متزامن مع GitHub</span>
+        </motion.div>
+
         {/* Hero Section */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-12 min-h-[45vh] sm:min-h-[50vh] lg:min-h-[60vh]">
           {/* Profile Image - Shows first on mobile */}
