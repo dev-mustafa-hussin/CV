@@ -12,6 +12,17 @@ export interface Project {
     percentage: number;
   }[];
   features: string[];
+  supabaseFeatures?: {
+    name: string;
+    nameAr: string;
+  }[];
+  databaseSchema?: {
+    name: string;
+    nameAr: string;
+  }[];
+  challenges?: string[];
+  solutions?: string[];
+  videoUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -51,6 +62,40 @@ export const projects: Project[] = [
       'تصميم متجاوب لجميع الأجهزة',
       'دعم متعدد اللغات',
     ],
+    supabaseFeatures: [
+      { name: 'Row Level Security (RLS)', nameAr: 'أمان على مستوى كل صف' },
+      { name: 'Realtime Subscriptions', nameAr: 'تحديثات فورية للبيانات' },
+      { name: 'PostgreSQL', nameAr: 'قاعدة بيانات علاقية كاملة' },
+      { name: 'Storage', nameAr: 'تخزين ملفات متقدم مع سياسات أمان' },
+      { name: 'Authentication', nameAr: 'مصادقة متعددة الخيارات' },
+      { name: 'Edge Functions', nameAr: 'دوال سحابية مخصصة' },
+      { name: 'Database Triggers', nameAr: 'محفزات قاعدة البيانات' },
+    ],
+    databaseSchema: [
+      { name: 'users', nameAr: 'جدول المستخدمين' },
+      { name: 'profiles', nameAr: 'الملفات الشخصية' },
+      { name: 'products', nameAr: 'جدول المنتجات' },
+      { name: 'categories', nameAr: 'فئات المنتجات' },
+      { name: 'orders', nameAr: 'جدول الطلبات' },
+      { name: 'order_items', nameAr: 'عناصر الطلبات' },
+      { name: 'reviews', nameAr: 'التقييمات والمراجعات' },
+      { name: 'favorites', nameAr: 'المفضلات' },
+      { name: 'cart_items', nameAr: 'عناصر السلة' },
+      { name: 'payments', nameAr: 'المدفوعات' },
+    ],
+    challenges: [
+      'تصميم نظام قاعدة بيانات علاقية متكامل',
+      'تنفيذ التحديثات اللحظية مع Supabase Realtime',
+      'إدارة أمان البيانات مع Row Level Security',
+      'دمج نظام الدفع مع الحفاظ على الأمان',
+    ],
+    solutions: [
+      'تصميم مخطط قاعدة بيانات محكم مع العلاقات',
+      'استخدام Supabase Realtime للبيانات الحية',
+      'تطبيق سياسات RLS مفصلة لكل جدول',
+      'دمج Stripe مع التحقق من الصحة من السيرفر',
+    ],
+    videoUrl: 'https://www.youtube.com/watch?v=example',
   },
   {
     id: 'chatapp',
@@ -76,6 +121,16 @@ export const projects: Project[] = [
       'إشعارات فورية',
       'تشفير المحادثات',
     ],
+    challenges: [
+      'ضمان تسليم الرسائل بشكل فوري',
+      'إدارة حالة الاتصال والانقطاع',
+      'تحسين أداء التطبيق مع كثرة الرسائل',
+    ],
+    solutions: [
+      'استخدام WebSocket للاتصال المستمر',
+      'تطبيق نظام Queue للرسائل المعلقة',
+      'تحميل الرسائل بشكل تدريجي (Pagination)',
+    ],
   },
   {
     id: 'socialmedia',
@@ -100,6 +155,16 @@ export const projects: Project[] = [
       'استكشاف المحتوى والترندات',
       'رسائل خاصة ومجموعات',
       'إشعارات ذكية',
+    ],
+    challenges: [
+      'بناء نظام Feed ديناميكي وسريع',
+      'إدارة العلاقات بين المستخدمين',
+      'تحسين تجربة التصفح اللانهائي',
+    ],
+    solutions: [
+      'استخدام خوارزمية ذكية للـ Feed',
+      'تصميم قاعدة بيانات محسنة للعلاقات',
+      'تطبيق Infinite Scroll مع Caching',
     ],
   },
 ];
