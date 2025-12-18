@@ -1,3 +1,5 @@
+import profileImage from '@/assets/profile.png';
+
 interface ProfileImageProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -19,13 +21,15 @@ const ProfileImage = ({ size = 'lg', className = '' }: ProfileImageProps) => {
       <div
         className={`${sizeClasses[size]} rounded-full border-4 border-primary relative overflow-hidden glow-border`}
       >
-        {/* Placeholder with gradient */}
-        <div className="w-full h-full bg-gradient-to-br from-primary/30 via-card to-info/20 flex items-center justify-center">
-          <span className="text-6xl md:text-7xl font-bold text-primary">A</span>
-        </div>
+        {/* Profile Image */}
+        <img 
+          src={profileImage} 
+          alt="Akram Atiia" 
+          className="w-full h-full object-cover object-top"
+        />
         
         {/* Duotone overlay effect */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-destructive/20 via-transparent to-info/20 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-destructive/10 via-transparent to-info/10 mix-blend-overlay" />
       </div>
     </div>
   );
