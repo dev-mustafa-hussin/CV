@@ -5,9 +5,9 @@ import StatItem from '@/components/StatItem';
 import NavigationCard from '@/components/NavigationCard';
 
 const navItems = [
-  { title: 'اتصل بي', description: 'لعمل إدارتي', icon: 'mail' as const, link: '/contact' },
-  { title: 'مهاراتي', description: 'قدرات الخاصة', icon: 'target' as const, link: '/skills' },
   { title: 'مشاريعي', description: 'أعمالي المبدعة', icon: 'briefcase' as const, link: '/projects' },
+  { title: 'مهاراتي', description: 'قدرات الخاصة', icon: 'target' as const, link: '/skills' },
+  { title: 'اتصل بي', description: 'لعمل إدارتي', icon: 'mail' as const, link: '/contact' },
 ];
 
 const Index = () => {
@@ -26,13 +26,8 @@ const Index = () => {
       <AnimatedBackground />
 
       <main className="relative z-10 container mx-auto px-4 py-8 md:py-16">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[60vh]">
-          {/* Right side - Profile Image */}
-          <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <ProfileImage />
-          </div>
-
-          {/* Left side - Content */}
+        <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12 min-h-[60vh]">
+          {/* Right side - Content */}
           <div className="text-center lg:text-right max-w-xl">
             <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
@@ -52,6 +47,11 @@ const Index = () => {
               <StatItem value="+15" label="تكنولوجيا مستخدمة" />
               <StatItem value="+3" label="مشروع مكتمل" emoji="💼" />
             </div>
+          </div>
+
+          {/* Left side - Profile Image */}
+          <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <ProfileImage />
           </div>
         </div>
 
