@@ -8,7 +8,7 @@ import { projects, ProjectStat } from '@/data/projects';
 import StatsChart from '@/components/StatsChart';
 import ProjectTimeline from '@/components/ProjectTimeline';
 import TechStack3D from '@/components/TechStack3D';
-import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3, GitBranch, Box, Globe, BookOpen, Building, CheckSquare } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3, GitBranch, Box, Globe, BookOpen, Building, CheckSquare, Wallet, Dumbbell, GraduationCap, UtensilsCrossed, Plane } from 'lucide-react';
 // Import screenshots
 import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
 import ecommerceCart from '@/assets/projects/ecommerce-cart.png';
@@ -19,11 +19,23 @@ import chatappGroup from '@/assets/projects/chatapp-group.png';
 import socialmediaScreenshot from '@/assets/projects/socialmedia-screenshot.png';
 import socialmediaProfile from '@/assets/projects/socialmedia-profile.png';
 import socialmediaExplore from '@/assets/projects/socialmedia-explore.png';
+import taskmanagerScreenshot from '@/assets/projects/taskmanager-screenshot.png';
+import fitnessScreenshot from '@/assets/projects/fitness-screenshot.png';
+import educationScreenshot from '@/assets/projects/education-screenshot.png';
+import fooddeliveryScreenshot from '@/assets/projects/fooddelivery-screenshot.png';
+import travelScreenshot from '@/assets/projects/travel-screenshot.png';
+import walletScreenshot from '@/assets/projects/wallet-screenshot.png';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   shopping: ShoppingBag,
   chat: MessageCircle,
   social: Users,
+  task: CheckSquare,
+  fitness: Dumbbell,
+  education: GraduationCap,
+  food: UtensilsCrossed,
+  travel: Plane,
+  wallet: Wallet,
   erp: Database,
   web: Globe,
   training: BookOpen,
