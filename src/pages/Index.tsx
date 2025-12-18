@@ -26,7 +26,7 @@ const Index = () => {
       <AnimatedBackground />
 
       <main className="relative z-10 container mx-auto px-4 py-8 md:py-12 lg:py-16">
-        <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-8 lg:gap-12 min-h-[50vh] lg:min-h-[60vh]">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 min-h-[50vh] lg:min-h-[60vh]">
           {/* Right side - Content */}
           <div className="text-center lg:text-right flex-1 max-w-xl">
             <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
