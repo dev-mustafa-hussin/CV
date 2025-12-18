@@ -114,7 +114,7 @@ const Index = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
               >
-                مطور تطبيقات
+                Full Stack Developer & ERP Consultant
               </motion.h2>
               <motion.p 
                 className="text-muted-foreground text-sm xs:text-base md:text-lg mb-6 sm:mb-8 px-2 sm:px-0"
