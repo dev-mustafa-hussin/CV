@@ -1,61 +1,91 @@
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import SEO from '@/components/SEO';
-import { Code, Smartphone, Database, Palette, Globe, Zap } from 'lucide-react';
+import { Code, Smartphone, Database, Palette, Globe, Zap, Settings, BarChart3, Users, BookOpen } from 'lucide-react';
 
 const skills = [
   {
-    category: 'تطوير التطبيقات',
+    category: 'Odoo ERP Development',
+    icon: Settings,
+    items: [
+      { name: 'Python', level: 95 },
+      { name: 'Odoo Framework', level: 98 },
+      { name: 'XML/QWeb', level: 92 },
+      { name: 'JavaScript/OWL', level: 88 },
+      { name: 'PostgreSQL', level: 90 },
+    ],
+  },
+  {
+    category: 'Full Stack Web',
+    icon: Globe,
+    items: [
+      { name: 'React.js', level: 92 },
+      { name: 'TypeScript', level: 90 },
+      { name: 'Node.js', level: 88 },
+      { name: 'Tailwind CSS', level: 95 },
+      { name: 'REST API', level: 92 },
+    ],
+  },
+  {
+    category: 'تطوير تطبيقات الموبايل',
     icon: Smartphone,
     items: [
       { name: 'Flutter', level: 95 },
       { name: 'Dart', level: 92 },
-      { name: 'React Native', level: 75 },
+      { name: 'Firebase', level: 88 },
+      { name: 'Supabase', level: 90 },
     ],
   },
   {
-    category: 'البرمجة',
-    icon: Code,
+    category: 'Business Analysis',
+    icon: BarChart3,
     items: [
-      { name: 'JavaScript', level: 88 },
-      { name: 'TypeScript', level: 85 },
-      { name: 'Python', level: 70 },
+      { name: 'Requirements Analysis', level: 95 },
+      { name: 'Process Mapping', level: 92 },
+      { name: 'Gap Analysis', level: 90 },
+      { name: 'Project Management', level: 90 },
+      { name: 'Documentation', level: 95 },
     ],
   },
   {
     category: 'قواعد البيانات',
     icon: Database,
     items: [
-      { name: 'PostgreSQL', level: 90 },
+      { name: 'PostgreSQL', level: 92 },
+      { name: 'MySQL', level: 85 },
+      { name: 'Supabase', level: 90 },
       { name: 'Firebase', level: 88 },
-      { name: 'Supabase', level: 92 },
     ],
   },
   {
-    category: 'التصميم',
-    icon: Palette,
-    items: [
-      { name: 'UI/UX Design', level: 85 },
-      { name: 'Figma', level: 82 },
-      { name: 'Material Design', level: 90 },
-    ],
-  },
-  {
-    category: 'تطوير الويب',
-    icon: Globe,
-    items: [
-      { name: 'React', level: 80 },
-      { name: 'HTML/CSS', level: 92 },
-      { name: 'Tailwind CSS', level: 88 },
-    ],
-  },
-  {
-    category: 'أدوات أخرى',
+    category: 'Odoo Modules',
     icon: Zap,
     items: [
-      { name: 'Git & GitHub', level: 90 },
-      { name: 'REST APIs', level: 92 },
-      { name: 'State Management', level: 88 },
+      { name: 'Sales & CRM', level: 98 },
+      { name: 'Inventory & Purchase', level: 95 },
+      { name: 'Accounting', level: 90 },
+      { name: 'HR & Payroll', level: 88 },
+      { name: 'Manufacturing', level: 85 },
+    ],
+  },
+  {
+    category: 'التدريب والاستشارات',
+    icon: BookOpen,
+    items: [
+      { name: 'End User Training', level: 98 },
+      { name: 'Technical Training', level: 95 },
+      { name: 'System Configuration', level: 95 },
+      { name: 'Data Migration', level: 88 },
+    ],
+  },
+  {
+    category: 'أدوات التطوير',
+    icon: Code,
+    items: [
+      { name: 'Git & GitHub', level: 95 },
+      { name: 'Docker', level: 85 },
+      { name: 'VS Code', level: 95 },
+      { name: 'Linux/Ubuntu', level: 88 },
     ],
   },
 ];
@@ -64,10 +94,10 @@ const Skills = () => {
   return (
     <>
       <SEO 
-        title="مهاراتي"
-        description="تعرف على المهارات التقنية لأكرم عطية - Flutter, React Native, Dart, Firebase, Supabase والمزيد."
+        title="مهاراتي | Full Stack Developer & ERP Consultant"
+        description="مهارات أكرم عطية - Odoo ERP Development, Full Stack Web, Python, React, PostgreSQL, Business Analysis, تدريب واستشارات أودوو."
         url="https://cv.3mcode-solutions.com/skills"
-        keywords="مهارات, Flutter skills, React Native, تقنيات, programming skills"
+        keywords="Odoo developer, Full Stack, Python, React, PostgreSQL, Business Analysis, ERP consultant, مهارات برمجة"
       />
       <div className="min-h-screen relative overflow-hidden">
       <AnimatedBackground />
