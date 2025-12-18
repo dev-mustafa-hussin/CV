@@ -7,9 +7,9 @@ interface ProfileImageProps {
 
 const ProfileImage = ({ size = 'lg', className = '' }: ProfileImageProps) => {
   const sizeClasses = {
-    sm: 'w-24 h-24',
-    md: 'w-48 h-48',
-    lg: 'w-72 h-72 md:w-80 md:h-80',
+    sm: 'w-32 h-32',
+    md: 'w-56 h-56',
+    lg: 'w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96',
   };
 
   return (
@@ -19,17 +19,17 @@ const ProfileImage = ({ size = 'lg', className = '' }: ProfileImageProps) => {
       
       {/* Main image container */}
       <div
-        className={`${sizeClasses[size]} rounded-full border-4 border-primary relative overflow-hidden glow-border`}
+        className={`${sizeClasses[size]} rounded-full border-4 border-primary relative overflow-hidden glow-border bg-card`}
       >
         {/* Profile Image */}
         <img 
           src={profileImage} 
           alt="Akram Atiia" 
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-center scale-125"
         />
         
         {/* Duotone overlay effect */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-destructive/10 via-transparent to-info/10 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-info/5 mix-blend-overlay" />
       </div>
     </div>
   );
