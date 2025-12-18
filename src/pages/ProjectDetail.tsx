@@ -37,7 +37,7 @@ const ProjectDetail = () => {
 
         {/* Header */}
         <div className="card-glass p-8 mb-8 animate-slide-up">
-          <div className="flex flex-col md:flex-row items-center gap-6">
+          <div className="flex flex-col md:flex-row-reverse items-center gap-6">
             {/* Icon */}
             <div className="w-28 h-28 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center
                             glow-border flex-shrink-0">
@@ -58,19 +58,19 @@ const ProjectDetail = () => {
 
         {/* About Section */}
         <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-          <h2 className="text-xl font-semibold text-foreground mb-4 text-right">
+          <h2 className="text-xl font-semibold text-foreground mb-4">
             نبذة عن المشروع
           </h2>
-          <p className="text-muted-foreground text-right leading-relaxed">
+          <p className="text-muted-foreground leading-relaxed">
             {project.fullDescription}
           </p>
         </section>
 
         {/* Technologies Section */}
         <section className="mb-8 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-          <h2 className="text-xl font-semibold text-foreground mb-6 text-right flex items-center justify-end gap-2">
-            <span>التقنيات المستخدمة</span>
+          <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
             <span className="text-primary">⭐</span>
+            <span>التقنيات المستخدمة</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {project.technologies.map((tech, index) => (
@@ -91,18 +91,18 @@ const ProjectDetail = () => {
 
         {/* Features Section */}
         <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.6s' }}>
-          <h2 className="text-xl font-semibold text-foreground mb-6 text-right">
+          <h2 className="text-xl font-semibold text-foreground mb-6">
             المميزات الرئيسية 🚀
           </h2>
           <ul className="space-y-4">
             {project.features.map((feature, index) => (
               <li
                 key={index}
-                className="flex items-center justify-end gap-3 text-muted-foreground animate-fade-in"
+                className="flex items-center gap-3 text-muted-foreground animate-fade-in"
                 style={{ animationDelay: `${0.7 + index * 0.1}s` }}
               >
-                <span className="text-right">{feature}</span>
                 <Rocket className="w-5 h-5 text-primary flex-shrink-0" />
+                <span>{feature}</span>
               </li>
             ))}
           </ul>
@@ -111,22 +111,22 @@ const ProjectDetail = () => {
         {/* Supabase Features Section */}
         {project.supabaseFeatures && project.supabaseFeatures.length > 0 && (
           <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.7s' }}>
-            <h2 className="text-xl font-semibold text-foreground mb-6 text-right flex items-center justify-end gap-2">
-              <span>مميزات Supabase</span>
+            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
               <Zap className="w-6 h-6 text-warning" />
+              <span>مميزات Supabase</span>
             </h2>
             <div className="bg-card/50 rounded-2xl p-6 border border-border/30">
               <ul className="space-y-4">
                 {project.supabaseFeatures.map((feature, index) => (
                   <li
                     key={index}
-                    className="flex items-center justify-end gap-3 animate-fade-in"
+                    className="flex items-center gap-3 animate-fade-in"
                     style={{ animationDelay: `${0.8 + index * 0.05}s` }}
                   >
-                    <span className="text-muted-foreground text-right">
+                    <Cloud className="w-5 h-5 text-success flex-shrink-0" />
+                    <span className="text-muted-foreground">
                       {feature.nameAr} - <span className="text-foreground font-medium">{feature.name}</span>
                     </span>
-                    <Cloud className="w-5 h-5 text-success flex-shrink-0" />
                   </li>
                 ))}
               </ul>
@@ -137,22 +137,22 @@ const ProjectDetail = () => {
         {/* Database Schema Section */}
         {project.databaseSchema && project.databaseSchema.length > 0 && (
           <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.8s' }}>
-            <h2 className="text-xl font-semibold text-foreground mb-6 text-right flex items-center justify-end gap-2">
-              <span>مخطط قاعدة البيانات</span>
+            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
               <Database className="w-6 h-6 text-primary" />
+              <span>مخطط قاعدة البيانات</span>
             </h2>
             <div className="bg-card/50 rounded-2xl p-4 border border-border/30">
               <div className="space-y-3">
                 {project.databaseSchema.map((table, index) => (
                   <div
                     key={index}
-                    className="bg-background/50 rounded-xl p-4 border border-border/20 flex items-center justify-end gap-3 animate-fade-in hover:border-primary/30 transition-colors"
+                    className="bg-background/50 rounded-xl p-4 border border-border/20 flex items-center gap-3 animate-fade-in hover:border-primary/30 transition-colors"
                     style={{ animationDelay: `${0.9 + index * 0.05}s` }}
                   >
-                    <span className="text-muted-foreground text-right">
+                    <Database className="w-5 h-5 text-primary/60 flex-shrink-0" />
+                    <span className="text-muted-foreground">
                       {table.nameAr} - <span className="text-foreground font-medium">{table.name}</span>
                     </span>
-                    <Database className="w-5 h-5 text-primary/60 flex-shrink-0" />
                   </div>
                 ))}
               </div>
@@ -163,27 +163,27 @@ const ProjectDetail = () => {
         {/* Challenges and Solutions Section */}
         {project.challenges && project.solutions && (
           <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.9s' }}>
-            <h2 className="text-xl font-semibold text-foreground mb-6 text-right flex items-center justify-end gap-2">
-              <span>التحديات والحلول</span>
+            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
               <Lightbulb className="w-6 h-6 text-warning" />
+              <span>التحديات والحلول</span>
             </h2>
             
             <div className="grid md:grid-cols-2 gap-6">
               {/* Challenges */}
               <div className="bg-warning/10 rounded-2xl p-6 border border-warning/30">
-                <h3 className="text-lg font-semibold text-warning mb-4 text-right flex items-center justify-end gap-2">
-                  <span>التحديات</span>
+                <h3 className="text-lg font-semibold text-warning mb-4 flex items-center gap-2">
                   <AlertTriangle className="w-5 h-5" />
+                  <span>التحديات</span>
                 </h3>
                 <ul className="space-y-3">
                   {project.challenges.map((challenge, index) => (
                     <li
                       key={index}
-                      className="flex items-start justify-end gap-3 text-muted-foreground animate-fade-in"
+                      className="flex items-start gap-3 text-muted-foreground animate-fade-in"
                       style={{ animationDelay: `${1 + index * 0.1}s` }}
                     >
-                      <span className="text-right">{challenge}</span>
                       <span className="text-warning mt-1">▸</span>
+                      <span>{challenge}</span>
                     </li>
                   ))}
                 </ul>
@@ -191,19 +191,19 @@ const ProjectDetail = () => {
 
               {/* Solutions */}
               <div className="bg-success/10 rounded-2xl p-6 border border-success/30">
-                <h3 className="text-lg font-semibold text-success mb-4 text-right flex items-center justify-end gap-2">
-                  <span>الحلول</span>
+                <h3 className="text-lg font-semibold text-success mb-4 flex items-center gap-2">
                   <Lightbulb className="w-5 h-5" />
+                  <span>الحلول</span>
                 </h3>
                 <ul className="space-y-3">
                   {project.solutions.map((solution, index) => (
                     <li
                       key={index}
-                      className="flex items-start justify-end gap-3 text-muted-foreground animate-fade-in"
+                      className="flex items-start gap-3 text-muted-foreground animate-fade-in"
                       style={{ animationDelay: `${1 + index * 0.1}s` }}
                     >
-                      <span className="text-right">{solution}</span>
                       <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+                      <span>{solution}</span>
                     </li>
                   ))}
                 </ul>
@@ -215,9 +215,9 @@ const ProjectDetail = () => {
         {/* Video Section */}
         {project.videoUrl && (
           <section className="card-glass p-6 animate-slide-up" style={{ animationDelay: '1s' }}>
-            <h2 className="text-xl font-semibold text-foreground mb-6 text-right flex items-center justify-end gap-2">
-              <span>فيديو توضيحي للمشروع</span>
+            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
               <Video className="w-6 h-6 text-primary" />
+              <span>فيديو توضيحي للمشروع</span>
             </h2>
             <div className="bg-card/50 rounded-2xl border border-border/30 overflow-hidden">
               <a
@@ -228,7 +228,7 @@ const ProjectDetail = () => {
               >
                 <div className="text-center">
                   <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Play className="w-8 h-8 text-primary-foreground ml-1" />
+                    <Play className="w-8 h-8 text-primary-foreground mr-[-4px]" />
                   </div>
                   <p className="text-primary font-medium">اضغط لمشاهدة الفيديو</p>
                 </div>
