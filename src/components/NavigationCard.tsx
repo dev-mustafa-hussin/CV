@@ -32,50 +32,64 @@ const NavigationCard = ({
 }: NavigationCardProps) => {
   const IconComponent = iconMap[icon];
 
+  const hasNavigation = showPrev || showNext;
+
   return (
-    <Link
-      to={link}
-      className="card-glass p-6 flex items-center gap-4 group transition-all duration-300 
-                 hover:shadow-[0_0_40px_hsl(252_100%_68%_/_0.3)] hover:-translate-y-2"
-    >
-      {/* Icon */}
-      <div className="w-14 h-14 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center
-                      group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300">
-        <IconComponent className="w-6 h-6 text-primary" />
-      </div>
+    <div className="relative">
+      {/* Navigation arrows for mobile - positioned outside the card */}
+      {hasNavigation && (
+        <div className="absolute inset-y-0 -left-2 -right-2 flex items-center justify-between pointer-events-none z-10">
+          {showNext && (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onNext?.();
+              }}
+              className="pointer-events-auto w-10 h-10 rounded-full bg-card/90 border border-primary/50 
+                         flex items-center justify-center shadow-lg active:scale-95 transition-all"
+              aria-label="التالي"
+            >
+              <ChevronLeft className="w-5 h-5 text-primary" />
+            </button>
+          )}
+          {showPrev && (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onPrev?.();
+              }}
+              className="pointer-events-auto w-10 h-10 rounded-full bg-card/90 border border-primary/50 
+                         flex items-center justify-center shadow-lg active:scale-95 transition-all"
+              aria-label="السابق"
+            >
+              <ChevronRight className="w-5 h-5 text-primary" />
+            </button>
+          )}
+        </div>
+      )}
 
-      {/* Content */}
-      <div className="flex-1">
-        <h3 className="text-lg font-semibold text-foreground mb-1">{title}</h3>
-        <p className="text-sm text-muted-foreground">{description}</p>
-      </div>
+      <Link
+        to={link}
+        className="card-glass p-4 sm:p-6 flex items-center gap-3 sm:gap-4 group transition-all duration-300 
+                   hover:shadow-[0_0_40px_hsl(252_100%_68%_/_0.3)] hover:-translate-y-2
+                   active:scale-[0.98] touch-manipulation"
+      >
+        {/* Icon */}
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary/20 border border-primary/50 
+                        flex items-center justify-center shrink-0
+                        group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300">
+          <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+        </div>
 
-      {/* Navigation arrows */}
-      <div className="flex flex-col gap-2">
-        {showPrev && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onPrev?.();
-            }}
-            className="p-1 rounded-full hover:bg-primary/20 transition-colors"
-          >
-            <ChevronLeft className="w-5 h-5 text-muted-foreground" />
-          </button>
-        )}
-        {showNext && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onNext?.();
-            }}
-            className="p-1 rounded-full hover:bg-primary/20 transition-colors"
-          >
-            <ChevronRight className="w-5 h-5 text-muted-foreground" />
-          </button>
-        )}
-      </div>
-    </Link>
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-0.5 sm:mb-1 truncate">{title}</h3>
+          <p className="text-xs sm:text-sm text-muted-foreground truncate">{description}</p>
+        </div>
+      </Link>
+    </div>
   );
 };
 
