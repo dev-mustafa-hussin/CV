@@ -7,7 +7,8 @@ import AnimatedCounter from '@/components/AnimatedCounter';
 import { projects, ProjectStat } from '@/data/projects';
 import StatsChart from '@/components/StatsChart';
 import ProjectTimeline from '@/components/ProjectTimeline';
-import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3, GitBranch } from 'lucide-react';
+import TechStack3D from '@/components/TechStack3D';
+import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3, GitBranch, Box } from 'lucide-react';
 // Import screenshots
 import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
 import ecommerceCart from '@/assets/projects/ecommerce-cart.png';
@@ -173,6 +174,20 @@ const ProjectDetail = () => {
             <span className="text-primary">⭐</span>
             <span>التقنيات المستخدمة</span>
           </h2>
+          
+          {/* 3D Tech Visualization */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Box className="w-5 h-5 text-primary" />
+              <span>عرض تفاعلي ثلاثي الأبعاد</span>
+            </h3>
+            <TechStack3D technologies={project.technologies} />
+            <p className="text-sm text-muted-foreground text-center mt-2">
+              اسحب للتدوير • استخدم عجلة الماوس للتكبير
+            </p>
+          </div>
+
+          {/* Tech Badges Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {project.technologies.map((tech, index) => (
               <div
