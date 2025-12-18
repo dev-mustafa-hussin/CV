@@ -5,7 +5,8 @@ import BackButton from '@/components/BackButton';
 import TechBadge from '@/components/TechBadge';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import { projects, ProjectStat } from '@/data/projects';
-import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp } from 'lucide-react';
+import StatsChart from '@/components/StatsChart';
+import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3 } from 'lucide-react';
 // Import screenshots
 import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
 import ecommerceCart from '@/assets/projects/ecommerce-cart.png';
@@ -142,6 +143,15 @@ const ProjectDetail = () => {
                   </div>
                 );
               })}
+            </div>
+            
+            {/* Charts */}
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+                <BarChart3 className="w-5 h-5 text-primary" />
+                <span>الرسوم البيانية</span>
+              </h3>
+              <StatsChart stats={project.stats} />
             </div>
           </section>
         )}
