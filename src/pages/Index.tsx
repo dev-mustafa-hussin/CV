@@ -3,6 +3,7 @@ import AnimatedBackground from '@/components/AnimatedBackground';
 import ProfileImage from '@/components/ProfileImage';
 import StatItem from '@/components/StatItem';
 import NavigationCard from '@/components/NavigationCard';
+import { Github, Linkedin, MessageCircle } from 'lucide-react';
 
 const navItems = [
   { title: 'مشاريعي', description: 'أعمالي المبدعة', icon: 'briefcase' as const, link: '/projects' },
@@ -10,6 +11,27 @@ const navItems = [
   { title: 'اتصل بي', description: 'لعمل إدارتي', icon: 'mail' as const, link: '/contact' },
   { title: 'سيرتي الذاتية', description: 'CV تفاعلي', icon: 'file' as const, link: '/resume' },
   { title: 'أسئلة شائعة', description: 'FAQ', icon: 'help' as const, link: '/faq' },
+];
+
+const socialLinks = [
+  { 
+    icon: Github, 
+    label: 'GitHub', 
+    url: 'https://github.com/akramatiia',
+    color: 'hover:text-foreground'
+  },
+  { 
+    icon: Linkedin, 
+    label: 'LinkedIn', 
+    url: 'https://linkedin.com/in/akramatiia',
+    color: 'hover:text-info'
+  },
+  { 
+    icon: MessageCircle, 
+    label: 'WhatsApp', 
+    url: 'https://wa.me/201234567890',
+    color: 'hover:text-success'
+  },
 ];
 
 const Index = () => {
@@ -26,6 +48,25 @@ const Index = () => {
   return (
     <div className="min-h-screen min-h-[100dvh] relative overflow-hidden safe-area-top">
       <AnimatedBackground />
+
+      {/* Floating Social Links - Desktop */}
+      <div className="hidden lg:flex fixed left-6 top-1/2 -translate-y-1/2 flex-col gap-4 z-20 animate-fade-in" style={{ animationDelay: '1s' }}>
+        {socialLinks.map((social) => (
+          <a
+            key={social.label}
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`w-12 h-12 rounded-full bg-card/80 backdrop-blur-sm border border-primary/30 
+                       flex items-center justify-center text-muted-foreground ${social.color}
+                       hover:border-primary hover:scale-110 hover:shadow-[0_0_20px_hsl(252_100%_68%_/_0.3)]
+                       transition-all duration-300`}
+            aria-label={social.label}
+          >
+            <social.icon className="w-5 h-5" />
+          </a>
+        ))}
+      </div>
 
       <main className="relative z-10 container mx-auto px-4 py-6 sm:py-8 md:py-12 lg:py-16">
         {/* Hero Section */}
@@ -54,6 +95,24 @@ const Index = () => {
               <StatItem value="100%" label="رضا المقرر" emoji="👍" />
               <StatItem value="+15" label="تكنولوجيا مستخدمة" />
               <StatItem value="+3" label="مشروع مكتمل" emoji="💼" />
+            </div>
+
+            {/* Social Links - Mobile & Tablet */}
+            <div className="flex lg:hidden items-center justify-center lg:justify-start gap-3 mt-6 animate-slide-up" style={{ animationDelay: '0.6s' }}>
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-11 h-11 rounded-full bg-card/80 border border-primary/30 
+                             flex items-center justify-center text-muted-foreground ${social.color}
+                             hover:border-primary active:scale-95 transition-all duration-300`}
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
