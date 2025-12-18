@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ShoppingBag, MessageCircle, Users } from 'lucide-react';
+import { ArrowRight, ShoppingBag, MessageCircle, Users } from 'lucide-react';
 
 interface ProjectCardProps {
   id: string;
@@ -37,7 +37,7 @@ const ProjectCard = ({
                         group-hover:bg-primary/30 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
           <IconComponent className="w-7 h-7 text-primary" />
         </div>
-        <div className="flex-1 text-right">
+        <div className="flex-1">
           <h3 className="text-lg font-semibold text-foreground mb-1">
             {title} - {titleAr}
           </h3>
@@ -48,12 +48,12 @@ const ProjectCard = ({
       </div>
 
       {/* Description */}
-      <p className="text-sm text-muted-foreground text-right mb-4 flex-1 line-clamp-3">
+      <p className="text-sm text-muted-foreground mb-4 flex-1 line-clamp-3">
         {description}
       </p>
 
       {/* Technologies */}
-      <div className="flex flex-wrap gap-2 justify-end mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         {technologies.slice(0, 4).map((tech) => (
           <span key={tech} className="tech-badge text-xs">
             {tech}
@@ -69,8 +69,8 @@ const ProjectCard = ({
         to={`/projects/${id}`}
         className="btn-primary text-center flex items-center justify-center gap-2"
       >
+        <ArrowRight className="w-4 h-4" />
         <span>استكشاف المشروع</span>
-        <ArrowLeft className="w-4 h-4" />
       </Link>
     </div>
   );

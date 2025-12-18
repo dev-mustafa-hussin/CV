@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 
 interface BackButtonProps {
   to?: string;
@@ -22,7 +22,7 @@ const BackButton = ({ to, label = 'رجوع' }: BackButtonProps) => {
       onClick={handleClick}
       className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
     >
-      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+      <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
       <span>{label}</span>
     </button>
   );

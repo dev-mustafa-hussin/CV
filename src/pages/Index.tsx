@@ -28,12 +28,12 @@ const Index = () => {
       <main className="relative z-10 container mx-auto px-4 py-8 md:py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[60vh]">
           {/* Right side - Profile Image */}
-          <div className="order-1 lg:order-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <ProfileImage />
           </div>
 
           {/* Left side - Content */}
-          <div className="order-2 lg:order-1 text-center lg:text-right max-w-xl">
+          <div className="text-center lg:text-right max-w-xl">
             <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
                 Akram Atiia
@@ -47,7 +47,7 @@ const Index = () => {
             </div>
 
             {/* Stats */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end mb-12 animate-slide-up" style={{ animationDelay: '0.5s' }}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12 animate-slide-up" style={{ animationDelay: '0.5s' }}>
               <StatItem value="100%" label="رضا المقرر" emoji="👍" />
               <StatItem value="+15" label="تكنولوجيا مستخدمة" />
               <StatItem value="+3" label="مشروع مكتمل" emoji="💼" />
@@ -68,7 +68,7 @@ const Index = () => {
 
           {/* Desktop: Show all cards */}
           <div className="hidden md:grid md:grid-cols-3 gap-6">
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <NavigationCard
                 key={item.title}
                 {...item}
