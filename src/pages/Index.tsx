@@ -11,6 +11,7 @@ import SEO from '@/components/SEO';
 import { Github, Linkedin, MessageCircle } from 'lucide-react';
 
 const navItems = [
+  { title: 'خدماتي', description: 'الباقات والأسعار', icon: 'service' as const, link: '/services' },
   { title: 'مشاريعي', description: 'أعمالي المبدعة', icon: 'briefcase' as const, link: '/projects' },
   { title: 'مهاراتي', description: 'قدرات الخاصة', icon: 'target' as const, link: '/skills' },
   { title: 'اتصل بي', description: 'لعمل إدارتي', icon: 'mail' as const, link: '/contact' },
