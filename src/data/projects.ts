@@ -4,6 +4,13 @@ export interface ProjectStat {
   label: string;
 }
 
+export interface TimelineMilestone {
+  date: string;
+  title: string;
+  description: string;
+  status: 'completed' | 'in-progress' | 'planned';
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -15,6 +22,7 @@ export interface Project {
   screenshot?: string;
   gallery?: string[];
   stats?: ProjectStat[];
+  timeline?: TimelineMilestone[];
   technologies: {
     name: string;
     description: string;
@@ -119,6 +127,14 @@ export const projects: Project[] = [
       'دمج Stripe مع التحقق من الصحة من السيرفر',
     ],
     videoUrl: 'https://www.youtube.com/watch?v=example',
+    timeline: [
+      { date: 'يناير 2024', title: 'بداية المشروع', description: 'تحليل المتطلبات وتصميم واجهات المستخدم الأولية', status: 'completed' },
+      { date: 'فبراير 2024', title: 'تطوير قاعدة البيانات', description: 'بناء مخطط قاعدة البيانات وإعداد Supabase', status: 'completed' },
+      { date: 'مارس 2024', title: 'تطوير الواجهات', description: 'برمجة واجهات المستخدم وربطها بالـ Backend', status: 'completed' },
+      { date: 'أبريل 2024', title: 'نظام الدفع', description: 'دمج Stripe وتنفيذ عمليات الدفع الآمنة', status: 'completed' },
+      { date: 'مايو 2024', title: 'الاختبار والنشر', description: 'اختبار شامل ونشر التطبيق على المتاجر', status: 'completed' },
+      { date: 'يونيو 2024', title: 'التحسينات المستمرة', description: 'إضافة مميزات جديدة وتحسين الأداء', status: 'in-progress' },
+    ],
   },
   {
     id: 'chatapp',
@@ -186,6 +202,13 @@ export const projects: Project[] = [
       'تحميل الرسائل بشكل تدريجي (Pagination)',
     ],
     videoUrl: 'https://www.youtube.com/watch?v=chatapp-demo',
+    timeline: [
+      { date: 'مارس 2024', title: 'التخطيط والتصميم', description: 'دراسة السوق وتصميم تجربة المستخدم', status: 'completed' },
+      { date: 'أبريل 2024', title: 'بناء البنية التحتية', description: 'إعداد Supabase Realtime والمصادقة', status: 'completed' },
+      { date: 'مايو 2024', title: 'تطوير نظام المراسلة', description: 'برمجة الدردشة الفورية والإشعارات', status: 'completed' },
+      { date: 'يونيو 2024', title: 'المجموعات والوسائط', description: 'إضافة دعم المجموعات ومشاركة الملفات', status: 'completed' },
+      { date: 'يوليو 2024', title: 'التحسينات الأمنية', description: 'تشفير الرسائل وتحسين الخصوصية', status: 'in-progress' },
+    ],
   },
   {
     id: 'socialmedia',
@@ -254,5 +277,14 @@ export const projects: Project[] = [
       'تطبيق Infinite Scroll مع Caching',
     ],
     videoUrl: 'https://www.youtube.com/watch?v=socialmedia-demo',
+    timeline: [
+      { date: 'فبراير 2024', title: 'البحث والتحليل', description: 'تحليل المنافسين وتحديد المميزات الأساسية', status: 'completed' },
+      { date: 'مارس 2024', title: 'التصميم والنماذج', description: 'تصميم واجهات المستخدم وتجربة الاستخدام', status: 'completed' },
+      { date: 'أبريل 2024', title: 'تطوير النظام الأساسي', description: 'بناء نظام المنشورات والتفاعلات', status: 'completed' },
+      { date: 'مايو 2024', title: 'نظام العلاقات', description: 'تطوير نظام المتابعة والأصدقاء', status: 'completed' },
+      { date: 'يونيو 2024', title: 'الوسائط المتعددة', description: 'دعم الصور والفيديوهات والقصص', status: 'completed' },
+      { date: 'يوليو 2024', title: 'الخوارزميات الذكية', description: 'تحسين Feed باستخدام AI', status: 'in-progress' },
+      { date: 'أغسطس 2024', title: 'البث المباشر', description: 'إضافة ميزة البث المباشر', status: 'planned' },
+    ],
   },
 ];
