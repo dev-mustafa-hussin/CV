@@ -71,11 +71,11 @@ const Skills = () => {
         </div>
 
         {/* Header */}
-        <div className="text-right mb-12 animate-slide-right">
+        <div className="mb-12 animate-slide-right">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
             مهاراتي 💡
           </h1>
-          <p className="text-muted-foreground max-w-xl mr-auto">
+          <p className="text-muted-foreground max-w-xl">
             مجموعة المهارات والتقنيات التي أتقنها وأستخدمها في تطوير المشاريع
           </p>
         </div>
@@ -89,13 +89,13 @@ const Skills = () => {
               style={{ animationDelay: `${0.2 + categoryIndex * 0.1}s` }}
             >
               {/* Category Header */}
-              <div className="flex items-center justify-end gap-3 mb-6">
-                <h3 className="text-lg font-semibold text-foreground">
-                  {category.category}
-                </h3>
+              <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/50 flex items-center justify-center">
                   <category.icon className="w-6 h-6 text-primary" />
                 </div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {category.category}
+                </h3>
               </div>
 
               {/* Skills List */}
@@ -107,8 +107,8 @@ const Skills = () => {
                     style={{ animationDelay: `${0.4 + categoryIndex * 0.1 + skillIndex * 0.05}s` }}
                   >
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-primary font-medium">{skill.level}%</span>
                       <span className="text-muted-foreground">{skill.name}</span>
+                      <span className="text-sm text-primary font-medium">{skill.level}%</span>
                     </div>
                     <div className="h-2 bg-secondary rounded-full overflow-hidden">
                       <div
