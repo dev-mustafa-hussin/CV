@@ -8,7 +8,7 @@ import { projects, ProjectStat } from '@/data/projects';
 import StatsChart from '@/components/StatsChart';
 import ProjectTimeline from '@/components/ProjectTimeline';
 import TechStack3D from '@/components/TechStack3D';
-import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3, GitBranch, Box } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3, GitBranch, Box, Globe, BookOpen, Building, CheckSquare } from 'lucide-react';
 // Import screenshots
 import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
 import ecommerceCart from '@/assets/projects/ecommerce-cart.png';
@@ -20,19 +20,25 @@ import socialmediaScreenshot from '@/assets/projects/socialmedia-screenshot.png'
 import socialmediaProfile from '@/assets/projects/socialmedia-profile.png';
 import socialmediaExplore from '@/assets/projects/socialmedia-explore.png';
 
-const iconMap = {
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   shopping: ShoppingBag,
   chat: MessageCircle,
   social: Users,
+  erp: Database,
+  web: Globe,
+  training: BookOpen,
+  analysis: BarChart3,
 };
 
-const statIconMap = {
+const statIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   users: Users,
   downloads: Download,
   star: Star,
   code: Code,
   clock: Clock,
   update: RefreshCw,
+  check: CheckSquare,
+  building: Building,
 };
 
 const screenshotMap: Record<string, string> = {
