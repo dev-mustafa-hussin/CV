@@ -6,7 +6,8 @@ import TechBadge from '@/components/TechBadge';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import { projects, ProjectStat } from '@/data/projects';
 import StatsChart from '@/components/StatsChart';
-import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3 } from 'lucide-react';
+import ProjectTimeline from '@/components/ProjectTimeline';
+import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3, GitBranch } from 'lucide-react';
 // Import screenshots
 import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
 import ecommerceCart from '@/assets/projects/ecommerce-cart.png';
@@ -309,6 +310,17 @@ const ProjectDetail = () => {
                 </ul>
               </div>
             </div>
+          </section>
+        )}
+
+        {/* Timeline Section */}
+        {project.timeline && project.timeline.length > 0 && (
+          <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.92s' }}>
+            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
+              <GitBranch className="w-6 h-6 text-primary" />
+              <span>مراحل التطوير</span>
+            </h2>
+            <ProjectTimeline milestones={project.timeline} />
           </section>
         )}
 
