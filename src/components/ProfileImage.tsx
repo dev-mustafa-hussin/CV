@@ -7,9 +7,9 @@ interface ProfileImageProps {
 
 const ProfileImage = ({ size = 'lg', className = '' }: ProfileImageProps) => {
   const sizeClasses = {
-    sm: 'w-32 h-32',
-    md: 'w-56 h-56',
-    lg: 'w-72 h-72 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px]',
+    sm: 'w-24 h-24 sm:w-32 sm:h-32',
+    md: 'w-40 h-40 sm:w-56 sm:h-56',
+    lg: 'w-52 h-52 xs:w-64 xs:h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px]',
   };
 
   return (
