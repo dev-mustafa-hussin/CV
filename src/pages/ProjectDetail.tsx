@@ -57,12 +57,24 @@ const screenshotMap: Record<string, string> = {
   ecommerce: ecommerceScreenshot,
   chatapp: chatappScreenshot,
   socialmedia: socialmediaScreenshot,
+  taskmanager: taskmanagerScreenshot,
+  fitness: fitnessScreenshot,
+  education: educationScreenshot,
+  fooddelivery: fooddeliveryScreenshot,
+  travel: travelScreenshot,
+  wallet: walletScreenshot,
 };
 
 const galleryMap: Record<string, string[]> = {
   ecommerce: [ecommerceScreenshot, ecommerceCart, ecommerceProduct],
   chatapp: [chatappScreenshot, chatappContacts, chatappGroup],
   socialmedia: [socialmediaScreenshot, socialmediaProfile, socialmediaExplore],
+  taskmanager: [taskmanagerScreenshot],
+  fitness: [fitnessScreenshot],
+  education: [educationScreenshot],
+  fooddelivery: [fooddeliveryScreenshot],
+  travel: [travelScreenshot],
+  wallet: [walletScreenshot],
 };
 
 const ProjectDetail = () => {
