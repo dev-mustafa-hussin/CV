@@ -1,14 +1,21 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import TechBadge from '@/components/TechBadge';
 import { projects } from '@/data/projects';
-import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 // Import screenshots
 import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
+import ecommerceCart from '@/assets/projects/ecommerce-cart.png';
+import ecommerceProduct from '@/assets/projects/ecommerce-product.png';
 import chatappScreenshot from '@/assets/projects/chatapp-screenshot.png';
+import chatappContacts from '@/assets/projects/chatapp-contacts.png';
+import chatappGroup from '@/assets/projects/chatapp-group.png';
 import socialmediaScreenshot from '@/assets/projects/socialmedia-screenshot.png';
+import socialmediaProfile from '@/assets/projects/socialmedia-profile.png';
+import socialmediaExplore from '@/assets/projects/socialmedia-explore.png';
 
 const iconMap = {
   shopping: ShoppingBag,
@@ -20,6 +27,12 @@ const screenshotMap: Record<string, string> = {
   ecommerce: ecommerceScreenshot,
   chatapp: chatappScreenshot,
   socialmedia: socialmediaScreenshot,
+};
+
+const galleryMap: Record<string, string[]> = {
+  ecommerce: [ecommerceScreenshot, ecommerceCart, ecommerceProduct],
+  chatapp: [chatappScreenshot, chatappContacts, chatappGroup],
+  socialmedia: [socialmediaScreenshot, socialmediaProfile, socialmediaExplore],
 };
 
 const ProjectDetail = () => {
@@ -36,6 +49,14 @@ const ProjectDetail = () => {
 
   const IconComponent = iconMap[project.icon];
   const screenshot = screenshotMap[project.id];
+  const gallery = galleryMap[project.id] || [];
+  
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+
+  const openLightbox = (index: number) => setSelectedImage(index);
+  const closeLightbox = () => setSelectedImage(null);
+  const nextImage = () => setSelectedImage(prev => prev !== null ? (prev + 1) % gallery.length : 0);
+  const prevImage = () => setSelectedImage(prev => prev !== null ? (prev - 1 + gallery.length) % gallery.length : 0);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -234,6 +255,37 @@ const ProjectDetail = () => {
           </section>
         )}
 
+        {/* Gallery Section */}
+        {gallery.length > 0 && (
+          <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.95s' }}>
+            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
+              <Images className="w-6 h-6 text-primary" />
+              <span>معرض الصور</span>
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {gallery.map((img, index) => (
+                <div
+                  key={index}
+                  className="relative cursor-pointer group animate-fade-in"
+                  style={{ animationDelay: `${1 + index * 0.1}s` }}
+                  onClick={() => openLightbox(index)}
+                >
+                  <div className="rounded-2xl overflow-hidden border border-border/30 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/10">
+                    <img
+                      src={img}
+                      alt={`${project.titleAr} - صورة ${index + 1}`}
+                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
+                      <span className="text-sm text-foreground font-medium">عرض الصورة</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Video Section */}
         {project.videoUrl && (
           <section className="card-glass p-6 animate-slide-up" style={{ animationDelay: '1s' }}>
@@ -259,6 +311,49 @@ const ProjectDetail = () => {
           </section>
         )}
       </main>
+
+      {/* Lightbox Modal */}
+      {selectedImage !== null && (
+        <div 
+          className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={closeLightbox}
+        >
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 w-12 h-12 rounded-full bg-card/50 border border-border/30 flex items-center justify-center text-foreground hover:bg-card transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          
+          <button
+            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            className="absolute left-4 w-12 h-12 rounded-full bg-card/50 border border-border/30 flex items-center justify-center text-foreground hover:bg-card transition-colors"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+          
+          <button
+            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            className="absolute right-4 w-12 h-12 rounded-full bg-card/50 border border-border/30 flex items-center justify-center text-foreground hover:bg-card transition-colors"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <div 
+            className="max-w-sm md:max-w-md lg:max-w-lg max-h-[80vh] animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={gallery[selectedImage]}
+              alt={`${project.titleAr} - صورة ${selectedImage + 1}`}
+              className="w-full h-auto rounded-3xl border-2 border-primary/30 shadow-2xl shadow-primary/30"
+            />
+            <p className="text-center text-muted-foreground mt-4">
+              {selectedImage + 1} / {gallery.length}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -7,6 +7,7 @@ export interface Project {
   fullDescription: string;
   icon: 'shopping' | 'chat' | 'social';
   screenshot?: string;
+  gallery?: string[];
   technologies: {
     name: string;
     description: string;
@@ -36,6 +37,11 @@ export const projects: Project[] = [
     fullDescription: 'تطبيق متجر الكترونى متكامل يوفر تجربة تسوق احترافية مع نظام إدارة متكامل للمنتجات والطلبات. يتميز بواجهة مستخدم عصرية وسهلة الاستخدام مع دعم كامل للدفع الإلكتروني وتتبع الطلبات في الوقت الحقيقي.',
     icon: 'shopping',
     screenshot: '/src/assets/projects/ecommerce-screenshot.png',
+    gallery: [
+      '/src/assets/projects/ecommerce-screenshot.png',
+      '/src/assets/projects/ecommerce-cart.png',
+      '/src/assets/projects/ecommerce-product.png',
+    ],
     technologies: [
       { name: 'Flutter', description: 'تطوير مشاريع', percentage: 99 },
       { name: 'Dart', description: 'لغة البرمجة الأساسية', percentage: 98 },
@@ -108,6 +114,11 @@ export const projects: Project[] = [
     fullDescription: 'تطبيق دردشة متطور يوفر تجربة تواصل فورية مع واجهة مستخدم سلسة وعصرية. يدعم الرسائل النصية والوسائط المتعددة مع إمكانية إنشاء مجموعات والمحادثات الخاصة.',
     icon: 'chat',
     screenshot: '/src/assets/projects/chatapp-screenshot.png',
+    gallery: [
+      '/src/assets/projects/chatapp-screenshot.png',
+      '/src/assets/projects/chatapp-contacts.png',
+      '/src/assets/projects/chatapp-group.png',
+    ],
     technologies: [
       { name: 'Flutter', description: 'إطار العمل الأساسي', percentage: 99 },
       { name: 'Realtime Database', description: 'قاعدة بيانات لحظية', percentage: 97 },
@@ -162,6 +173,11 @@ export const projects: Project[] = [
     fullDescription: 'منصة اجتماعية متكاملة تجمع بين أفضل مميزات التطبيقات الاجتماعية في تجربة واحدة سلسة. يدعم مشاركة المنشورات والصور والفيديوهات مع نظام تفاعل متكامل.',
     icon: 'social',
     screenshot: '/src/assets/projects/socialmedia-screenshot.png',
+    gallery: [
+      '/src/assets/projects/socialmedia-screenshot.png',
+      '/src/assets/projects/socialmedia-profile.png',
+      '/src/assets/projects/socialmedia-explore.png',
+    ],
     technologies: [
       { name: 'Flutter', description: 'إطار العمل', percentage: 99 },
       { name: 'Dart', description: 'لغة البرمجة', percentage: 98 },
