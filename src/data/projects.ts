@@ -295,6 +295,8 @@ export const projects: Project[] = [
     description: 'تطبيق إدارة مهام متقدم مع تقويم ذكي وتنبيهات وتحليلات للإنتاجية الشخصية',
     fullDescription: 'تطبيق شامل لإدارة المهام والمشاريع يساعد على تنظيم الوقت وزيادة الإنتاجية. يتميز بواجهة سهلة الاستخدام مع تقويم متكامل ونظام تذكيرات ذكي وتقارير تحليلية للأداء.',
     icon: 'task',
+    screenshot: '/src/assets/projects/taskmanager-screenshot.png',
+    gallery: ['/src/assets/projects/taskmanager-screenshot.png'],
     stats: [
       { icon: 'users', value: '12,000+', label: 'مستخدم نشط' },
       { icon: 'downloads', value: '28,000+', label: 'تحميل' },
@@ -364,6 +366,8 @@ export const projects: Project[] = [
     description: 'تطبيق شامل للياقة البدنية مع تتبع التمارين والتغذية وخطط تدريب مخصصة',
     fullDescription: 'تطبيق لياقة بدنية متكامل يساعدك على تحقيق أهدافك الصحية. يتضمن مكتبة تمارين شاملة مع فيديوهات توضيحية، متتبع للسعرات الحرارية، وخطط تدريب مخصصة حسب مستواك وأهدافك.',
     icon: 'fitness',
+    screenshot: '/src/assets/projects/fitness-screenshot.png',
+    gallery: ['/src/assets/projects/fitness-screenshot.png'],
     stats: [
       { icon: 'users', value: '25,000+', label: 'مستخدم نشط' },
       { icon: 'downloads', value: '60,000+', label: 'تحميل' },
@@ -436,6 +440,8 @@ export const projects: Project[] = [
     description: 'منصة تعليمية متكاملة مع دورات تفاعلية واختبارات وشهادات معتمدة',
     fullDescription: 'منصة تعليمية شاملة تقدم تجربة تعلم متميزة مع محتوى تفاعلي متنوع. تتضمن دورات فيديو، اختبارات تفاعلية، متابعة التقدم، وشهادات إتمام. مصممة لتناسب جميع المستويات والأعمار.',
     icon: 'education',
+    screenshot: '/src/assets/projects/education-screenshot.png',
+    gallery: ['/src/assets/projects/education-screenshot.png'],
     stats: [
       { icon: 'users', value: '45,000+', label: 'طالب مسجل' },
       { icon: 'downloads', value: '85,000+', label: 'تحميل' },
@@ -510,6 +516,8 @@ export const projects: Project[] = [
     description: 'تطبيق توصيل طعام متكامل مع تتبع الطلبات لحظياً ونظام تقييم شامل',
     fullDescription: 'تطبيق توصيل طعام احترافي يربط بين العملاء والمطاعم وسائقي التوصيل. يتميز بتتبع الطلبات في الوقت الحقيقي على الخريطة، نظام تقييم متكامل، وخيارات دفع متعددة.',
     icon: 'food',
+    screenshot: '/src/assets/projects/fooddelivery-screenshot.png',
+    gallery: ['/src/assets/projects/fooddelivery-screenshot.png'],
     stats: [
       { icon: 'users', value: '30,000+', label: 'مستخدم نشط' },
       { icon: 'downloads', value: '75,000+', label: 'تحميل' },
@@ -583,6 +591,8 @@ export const projects: Project[] = [
     description: 'تطبيق سياحي شامل مع حجز الفنادق والرحلات ودليل سياحي تفاعلي',
     fullDescription: 'تطبيق سفر وسياحة متكامل يوفر كل ما تحتاجه لرحلة مثالية. يشمل حجز الفنادق والطيران، دليل سياحي تفاعلي مع خرائط أوفلاين، توصيات مخصصة، وتخطيط الرحلات بذكاء.',
     icon: 'travel',
+    screenshot: '/src/assets/projects/travel-screenshot.png',
+    gallery: ['/src/assets/projects/travel-screenshot.png'],
     stats: [
       { icon: 'users', value: '18,000+', label: 'مسافر نشط' },
       { icon: 'downloads', value: '42,000+', label: 'تحميل' },
@@ -656,6 +666,8 @@ export const projects: Project[] = [
     description: 'تطبيق إدارة مالية شخصية مع تتبع المصروفات والميزانيات وتحليلات ذكية',
     fullDescription: 'تطبيق محفظة رقمية وإدارة مالية شامل يساعدك على تتبع مصروفاتك ودخلك بسهولة. يقدم تحليلات ذكية لعاداتك المالية، تنبيهات الميزانية، وتقارير مفصلة لمساعدتك على توفير المال.',
     icon: 'shopping',
+    screenshot: '/src/assets/projects/wallet-screenshot.png',
+    gallery: ['/src/assets/projects/wallet-screenshot.png'],
     stats: [
       { icon: 'users', value: '22,000+', label: 'مستخدم نشط' },
       { icon: 'downloads', value: '50,000+', label: 'تحميل' },
