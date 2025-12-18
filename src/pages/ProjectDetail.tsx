@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import TechBadge from '@/components/TechBadge';
+import AnimatedCounter from '@/components/AnimatedCounter';
 import { projects, ProjectStat } from '@/data/projects';
 import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp } from 'lucide-react';
-
 // Import screenshots
 import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
 import ecommerceCart from '@/assets/projects/ecommerce-cart.png';
@@ -114,6 +114,11 @@ const ProjectDetail = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {project.stats.map((stat, index) => {
                 const StatIcon = statIconMap[stat.icon];
+                // Parse value to extract number and suffix
+                const valueMatch = stat.value.match(/^([\d,]+)(.*)$/);
+                const numericValue = valueMatch ? parseInt(valueMatch[1].replace(/,/g, '')) : 0;
+                const suffix = valueMatch ? valueMatch[2] : stat.value;
+                
                 return (
                   <div
                     key={index}
@@ -123,7 +128,16 @@ const ProjectDetail = () => {
                     <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-2">
                       <StatIcon className="w-5 h-5 text-primary" />
                     </div>
-                    <p className="text-xl md:text-2xl font-bold text-foreground">{stat.value}</p>
+                    {numericValue > 0 ? (
+                      <AnimatedCounter 
+                        value={numericValue} 
+                        suffix={suffix}
+                        className="text-xl md:text-2xl font-bold text-foreground"
+                        duration={1500 + index * 200}
+                      />
+                    ) : (
+                      <p className="text-xl md:text-2xl font-bold text-foreground">{stat.value}</p>
+                    )}
                     <p className="text-xs md:text-sm text-muted-foreground">{stat.label}</p>
                   </div>
                 );
