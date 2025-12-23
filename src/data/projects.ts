@@ -1,3 +1,5 @@
+import wasalnyScreenshot from '@/assets/projects/wasalny-screenshot.png';
+
 export interface ProjectStat {
   icon: 'users' | 'downloads' | 'star' | 'code' | 'clock' | 'update' | 'check' | 'building';
   value: string;
@@ -285,6 +287,86 @@ export const projects: Project[] = [
   },
 
   // ============= تطبيقات الموبايل =============
+  {
+    id: 'wasalny',
+    title: 'Wasalny - Food Delivery',
+    titleAr: 'وصلني - توصيل الطعام',
+    category: 'تطبيقات موبايل',
+    description: 'تطبيق توصيل طعام وتسوق متكامل يربط العملاء بالمطاعم والأسواق المفضلة مع توصيل سريع لباب المنزل',
+    fullDescription: 'تطبيق وصلني هو منصة توصيل طعام وتسوق شاملة تتيح للمستخدمين الطلب من مطاعمهم وأسواقهم المفضلة. يتميز بواجهة مستخدم عربية أنيقة، نظام تصنيفات ذكي (برجر، بيتزا، شاورما، مشويات، حلويات، قهوة)، عروض وخصومات مميزة، نظام مفضلات، إدارة عناوين متعددة، وتتبع الطلبات في الوقت الحقيقي.',
+    icon: 'food',
+    screenshot: wasalnyScreenshot,
+    gallery: [wasalnyScreenshot],
+    stats: [
+      { icon: 'users', value: '10,000+', label: 'مستخدم نشط' },
+      { icon: 'downloads', value: '25,000+', label: 'تحميل' },
+      { icon: 'star', value: '4.9', label: 'تقييم المتجر' },
+      { icon: 'code', value: '35,000+', label: 'سطر كود' },
+      { icon: 'clock', value: '4', label: 'أشهر تطوير' },
+      { icon: 'update', value: '20+', label: 'تحديث' },
+    ],
+    technologies: [
+      { name: 'React.js', description: 'مكتبة الواجهات الأمامية', percentage: 95 },
+      { name: 'TypeScript', description: 'لغة البرمجة الآمنة', percentage: 92 },
+      { name: 'Supabase', description: 'قاعدة البيانات والمصادقة', percentage: 96 },
+      { name: 'Tailwind CSS', description: 'تصميم الواجهات', percentage: 98 },
+      { name: 'PostgreSQL', description: 'قاعدة البيانات', percentage: 94 },
+      { name: 'Realtime Subscriptions', description: 'التحديثات اللحظية', percentage: 93 },
+      { name: 'Push Notifications', description: 'الإشعارات الفورية', percentage: 91 },
+      { name: 'Payment Gateway', description: 'بوابات الدفع', percentage: 95 },
+    ],
+    features: [
+      'تصفح المطاعم والأسواق حسب الفئات',
+      'نظام تصنيفات ذكي (برجر، بيتزا، شاورما، مشويات، حلويات، قهوة، سوشي)',
+      'عروض وخصومات مميزة مع أكواد الخصم',
+      'سلة مشتريات ذكية مع حساب التكلفة',
+      'نظام مفضلات للمطاعم والمنتجات',
+      'إدارة عناوين متعددة للتوصيل',
+      'تتبع الطلبات في الوقت الحقيقي',
+      'نظام تقييمات ومراجعات',
+      'دعم اللغة العربية بالكامل',
+      'واجهة مستخدم أنيقة ومتجاوبة',
+    ],
+    supabaseFeatures: [
+      { name: 'Authentication', nameAr: 'مصادقة متعددة الخيارات' },
+      { name: 'Row Level Security', nameAr: 'أمان على مستوى الصف' },
+      { name: 'Realtime', nameAr: 'تحديثات فورية للطلبات' },
+      { name: 'Storage', nameAr: 'تخزين صور المنتجات' },
+      { name: 'Edge Functions', nameAr: 'دوال معالجة الطلبات' },
+      { name: 'Database Triggers', nameAr: 'محفزات تحديث الحالة' },
+    ],
+    databaseSchema: [
+      { name: 'users', nameAr: 'جدول المستخدمين' },
+      { name: 'stores', nameAr: 'جدول المتاجر والمطاعم' },
+      { name: 'products', nameAr: 'جدول المنتجات' },
+      { name: 'categories', nameAr: 'جدول الفئات' },
+      { name: 'orders', nameAr: 'جدول الطلبات' },
+      { name: 'order_items', nameAr: 'جدول عناصر الطلب' },
+      { name: 'addresses', nameAr: 'جدول العناوين' },
+      { name: 'favorites', nameAr: 'جدول المفضلات' },
+      { name: 'reviews', nameAr: 'جدول التقييمات' },
+      { name: 'promotions', nameAr: 'جدول العروض والخصومات' },
+    ],
+    challenges: [
+      'إدارة الطلبات المتزامنة من عدة مستخدمين',
+      'تحديث حالة الطلب في الوقت الحقيقي',
+      'تصميم واجهة عربية متجاوبة وسهلة الاستخدام',
+      'التكامل مع بوابات الدفع المحلية',
+    ],
+    solutions: [
+      'استخدام Supabase Realtime للتحديثات اللحظية',
+      'بنية قاعدة بيانات محسنة مع Triggers',
+      'تصميم RTL متكامل مع Tailwind CSS',
+      'Edge Functions لمعالجة المدفوعات بأمان',
+    ],
+    timeline: [
+      { date: '2024 Q1', title: 'التخطيط والتصميم', description: 'تحليل المتطلبات وتصميم UI/UX', status: 'completed' },
+      { date: '2024 Q2', title: 'تطوير النواة', description: 'بناء الواجهات وقاعدة البيانات', status: 'completed' },
+      { date: '2024 Q3', title: 'التكاملات', description: 'ربط الدفع والإشعارات', status: 'completed' },
+      { date: '2024 Q4', title: 'الإطلاق', description: 'إطلاق النسخة الأولى', status: 'in-progress' },
+    ],
+    videoUrl: 'https://wasalny.3mcode-solutions.com/',
+  },
   {
     id: 'ecommerce',
     title: 'E-Commerce App',
