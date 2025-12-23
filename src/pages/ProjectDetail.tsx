@@ -413,12 +413,12 @@ const ProjectDetail = () => {
           </section>
         )}
 
-        {/* Video Section */}
+        {/* Video/Live Preview Section */}
         {project.videoUrl && (
           <section className="card-glass p-6 animate-slide-up" style={{ animationDelay: '1s' }}>
             <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
               <Video className="w-6 h-6 text-primary" />
-              <span>فيديو توضيحي للمشروع</span>
+              <span>معاينة حية للمشروع</span>
             </h2>
             <div className="bg-card/50 rounded-2xl border border-border/30 overflow-hidden">
               {project.videoUrl.includes('youtube.com') || project.videoUrl.includes('youtu.be') ? (
@@ -435,19 +435,36 @@ const ProjectDetail = () => {
                   />
                 </div>
               ) : (
-                <a
-                  href={project.videoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block aspect-video flex items-center justify-center bg-background/50 hover:bg-background/70 transition-colors cursor-pointer group"
-                >
-                  <div className="text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                      <Play className="w-8 h-8 text-primary-foreground mr-[-4px]" />
-                    </div>
-                    <p className="text-primary font-medium">اضغط لمشاهدة الفيديو</p>
+                <div className="space-y-4">
+                  {/* Interactive iframe preview */}
+                  <div className="aspect-video relative group">
+                    <iframe
+                      src={project.videoUrl}
+                      title={`${project.titleAr} - معاينة حية`}
+                      className="w-full h-full rounded-t-2xl border-0"
+                      loading="lazy"
+                      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                </a>
+                  
+                  {/* Action buttons */}
+                  <div className="flex flex-wrap items-center justify-center gap-4 p-4 bg-background/30 rounded-b-2xl">
+                    <a
+                      href={project.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                      <span>فتح في نافذة جديدة</span>
+                    </a>
+                    <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                      <Play className="w-4 h-4 text-success animate-pulse" />
+                      <span>التطبيق يعمل مباشرة</span>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           </section>
