@@ -1,4 +1,7 @@
 import wasalnyScreenshot from '@/assets/projects/wasalny-screenshot.png';
+import wasalnyPizza from '@/assets/projects/wasalny-pizza.png';
+import wasalnyBurger from '@/assets/projects/wasalny-burger.png';
+import wasalnyShawarma from '@/assets/projects/wasalny-shawarma.png';
 
 export interface ProjectStat {
   icon: 'users' | 'downloads' | 'star' | 'code' | 'clock' | 'update' | 'check' | 'building';
@@ -295,8 +298,7 @@ export const projects: Project[] = [
     description: 'تطبيق توصيل طعام وتسوق متكامل يربط العملاء بالمطاعم والأسواق المفضلة مع توصيل سريع لباب المنزل',
     fullDescription: 'تطبيق وصلني هو منصة توصيل طعام وتسوق شاملة تتيح للمستخدمين الطلب من مطاعمهم وأسواقهم المفضلة. يتميز بواجهة مستخدم عربية أنيقة، نظام تصنيفات ذكي (برجر، بيتزا، شاورما، مشويات، حلويات، قهوة)، عروض وخصومات مميزة، نظام مفضلات، إدارة عناوين متعددة، وتتبع الطلبات في الوقت الحقيقي.',
     icon: 'food',
-    screenshot: wasalnyScreenshot,
-    gallery: [wasalnyScreenshot],
+    gallery: [wasalnyScreenshot, wasalnyPizza, wasalnyBurger, wasalnyShawarma],
     stats: [
       { icon: 'users', value: '10,000+', label: 'مستخدم نشط' },
       { icon: 'downloads', value: '25,000+', label: 'تحميل' },

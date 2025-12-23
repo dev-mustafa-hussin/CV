@@ -25,6 +25,10 @@ import educationScreenshot from '@/assets/projects/education-screenshot.png';
 import fooddeliveryScreenshot from '@/assets/projects/fooddelivery-screenshot.png';
 import travelScreenshot from '@/assets/projects/travel-screenshot.png';
 import walletScreenshot from '@/assets/projects/wallet-screenshot.png';
+import wasalnyScreenshot from '@/assets/projects/wasalny-screenshot.png';
+import wasalnyPizza from '@/assets/projects/wasalny-pizza.png';
+import wasalnyBurger from '@/assets/projects/wasalny-burger.png';
+import wasalnyShawarma from '@/assets/projects/wasalny-shawarma.png';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   shopping: ShoppingBag,
@@ -63,6 +67,7 @@ const screenshotMap: Record<string, string> = {
   fooddelivery: fooddeliveryScreenshot,
   travel: travelScreenshot,
   wallet: walletScreenshot,
+  wasalny: wasalnyScreenshot,
 };
 
 const galleryMap: Record<string, string[]> = {
@@ -75,6 +80,7 @@ const galleryMap: Record<string, string[]> = {
   fooddelivery: [fooddeliveryScreenshot],
   travel: [travelScreenshot],
   wallet: [walletScreenshot],
+  wasalny: [wasalnyScreenshot, wasalnyPizza, wasalnyBurger, wasalnyShawarma],
 };
 
 const ProjectDetail = () => {
