@@ -8,7 +8,7 @@ import { projects, ProjectStat } from '@/data/projects';
 import StatsChart from '@/components/StatsChart';
 import ProjectTimeline from '@/components/ProjectTimeline';
 import TechStack3D from '@/components/TechStack3D';
-import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3, GitBranch, Box, Globe, BookOpen, Building, CheckSquare, Wallet, Dumbbell, GraduationCap, UtensilsCrossed, Plane } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Users, Rocket, Zap, Database, AlertTriangle, CheckCircle, Lightbulb, Play, Video, Cloud, Images, ChevronLeft, ChevronRight, X, Download, Star, Code, Clock, RefreshCw, TrendingUp, BarChart3, GitBranch, Box, Globe, BookOpen, Building, CheckSquare, Wallet, Dumbbell, GraduationCap, UtensilsCrossed, Plane, ExternalLink } from 'lucide-react';
 // Import screenshots
 import ecommerceScreenshot from '@/assets/projects/ecommerce-screenshot.png';
 import ecommerceCart from '@/assets/projects/ecommerce-cart.png';
@@ -134,9 +134,22 @@ const ProjectDetail = () => {
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3">
                 {project.title} - {project.titleAr}
               </h1>
-              <span className="inline-block bg-info/20 text-info px-4 py-1.5 rounded-full text-sm md:text-base">
+              <span className="inline-block bg-info/20 text-info px-4 py-1.5 rounded-full text-sm md:text-base mb-4">
                 {project.category}
               </span>
+              
+              {/* Live Demo Button */}
+              {project.videoUrl && (
+                <a
+                  href={project.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                  <span>تجربة مباشرة</span>
+                </a>
+              )}
             </div>
           </div>
         </div>
