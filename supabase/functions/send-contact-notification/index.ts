@@ -1,7 +1,12 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+
+const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -74,6 +79,31 @@ const handler = async (req: Request): Promise<Response> => {
     const budgetName = formData.budget ? budgetLabels[formData.budget] || formData.budget : 'غير محدد';
     const timelineName = formData.timeline ? timelineLabels[formData.timeline] || formData.timeline : 'غير محدد';
     const contactMethod = formData.preferredContact ? contactLabels[formData.preferredContact] || formData.preferredContact : 'غير محدد';
+
+    // Save message to database
+    console.log("Saving message to database...");
+    const { data: savedMessage, error: dbError } = await supabase
+      .from('contact_messages')
+      .insert({
+        name: formData.name,
+        email: formData.email,
+        whatsapp: formData.whatsapp || null,
+        service_type: formData.serviceType,
+        request_type: formData.requestType,
+        budget: formData.budget || null,
+        timeline: formData.timeline || null,
+        preferred_contact: formData.preferredContact || null,
+        message: formData.message,
+        status: 'new'
+      })
+      .select()
+      .single();
+
+    if (dbError) {
+      console.error("Database error:", dbError);
+    } else {
+      console.log("Message saved to database:", savedMessage.id);
+    }
 
     // Email to the owner (notification)
     const ownerEmailHtml = `
