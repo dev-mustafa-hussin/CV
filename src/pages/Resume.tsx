@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
+import Footer from '@/components/Footer';
 import { Download, Mail, Phone, MapPin, Globe, Award, Briefcase, GraduationCap, Code, Star, Calendar, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -330,6 +331,7 @@ const Resume = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

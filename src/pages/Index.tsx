@@ -8,6 +8,7 @@ import FadeIn from '@/components/animations/FadeIn';
 import ScaleIn from '@/components/animations/ScaleIn';
 import StaggerContainer, { StaggerItem } from '@/components/animations/StaggerContainer';
 import SEO from '@/components/SEO';
+import Footer from '@/components/Footer';
 import { Github, Linkedin, Facebook, Instagram, MessageCircle } from 'lucide-react';
 
 const navItems = [
@@ -252,6 +253,7 @@ const Index = () => {
           </StaggerContainer>
         </div>
       </main>
+        <Footer />
       </div>
     </>
   );

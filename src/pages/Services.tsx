@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import SEO from '@/components/SEO';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -495,6 +496,7 @@ const Services = () => {
             </>
           )}
         </main>
+        <Footer />
       </div>
     </>
   );

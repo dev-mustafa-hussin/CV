@@ -4,6 +4,7 @@ import ProjectCard from '@/components/ProjectCard';
 import BackButton from '@/components/BackButton';
 import StatItem from '@/components/StatItem';
 import SEO from '@/components/SEO';
+import Footer from '@/components/Footer';
 import { projects } from '@/data/projects';
 import { Search, Filter, X, Grid, List } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -237,6 +238,7 @@ const Projects = () => {
           </div>
         )}
       </main>
+        <Footer />
       </div>
     </>
   );

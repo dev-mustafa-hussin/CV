@@ -2,6 +2,7 @@ import { useState, useMemo, useRef } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import SEO from '@/components/SEO';
+import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Facebook, Instagram, MessageCircle, Upload, X, FileText, Image, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
@@ -700,6 +701,7 @@ const Contact = () => {
             </div>
           </div>
         </main>
+        <Footer />
       </div>
     </>
   );
