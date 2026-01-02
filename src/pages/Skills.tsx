@@ -95,7 +95,7 @@ const Skills = () => {
     <>
       <SEO 
         title="مهاراتي | Full Stack Developer & ERP Consultant"
-        description="مهارات أكرم عطية - Odoo ERP Development, Full Stack Web, Python, React, PostgreSQL, Business Analysis, تدريب واستشارات أودوو."
+        description="مهارات مصطفى حسين أحمد - Odoo ERP Development, Full Stack Web, Python, React, PostgreSQL, Business Analysis, تدريب واستشارات أودوو."
         url="https://cv.3mcode-solutions.com/skills"
         keywords="Odoo developer, Full Stack, Python, React, PostgreSQL, Business Analysis, ERP consultant, مهارات برمجة"
       />

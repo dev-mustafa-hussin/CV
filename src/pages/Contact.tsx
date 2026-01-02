@@ -23,7 +23,7 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: Mail, label: 'البريد الإلكتروني', value: 'akram@example.com' },
+    { icon: Mail, label: 'البريد الإلكتروني', value: 'mustafa@example.com' },
     { icon: Phone, label: 'رقم الهاتف', value: '+20 123 456 7890' },
     { icon: MapPin, label: 'الموقع', value: 'مصر' },
   ];
@@ -38,7 +38,7 @@ const Contact = () => {
     <>
       <SEO 
         title="اتصل بي"
-        description="تواصل مع أكرم عطية - مطور تطبيقات محترف. لديك مشروع في ذهنك؟ دعنا نتحدث ونحول فكرتك إلى حقيقة."
+        description="تواصل مع مصطفى حسين أحمد - مطور تطبيقات محترف. لديك مشروع في ذهنك؟ دعنا نتحدث ونحول فكرتك إلى حقيقة."
         url="https://cv.3mcode-solutions.com/contact"
         keywords="اتصل بي, تواصل, contact, hire developer, توظيف مطور"
       />

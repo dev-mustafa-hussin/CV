@@ -25,7 +25,7 @@ const ProfileImage = ({ size = 'lg', className = '' }: ProfileImageProps) => {
         {/* Profile Image */}
         <img 
           src={profileImage} 
-          alt="Akram Atiia" 
+          alt="Mustafa Hussein Ahmed" 
           className="w-full h-full object-cover object-top scale-110"
         />
       </div>

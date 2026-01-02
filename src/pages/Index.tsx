@@ -23,13 +23,13 @@ const socialLinks = [
   { 
     icon: Github, 
     label: 'GitHub', 
-    url: 'https://github.com/akramatiia',
+    url: 'https://github.com/dev-mustafa-hussin',
     color: 'hover:text-foreground'
   },
   { 
     icon: Linkedin, 
     label: 'LinkedIn', 
-    url: 'https://linkedin.com/in/akramatiia',
+    url: 'https://linkedin.com/in/mustafa-hussein',
     color: 'hover:text-info'
   },
   { 
@@ -54,8 +54,8 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="Akram Atiia | مطور تطبيقات محترف"
-        description="أكرم عطية - مطور تطبيقات محترف متخصص في Flutter و React Native. أطوّر حلولاً رقمية فريدة لا تُنسى. +3 مشاريع مكتملة، +15 تقنية، 100% رضا العملاء."
+        title="Mustafa Hussein | مطور تطبيقات محترف"
+        description="مصطفى حسين أحمد - مطور تطبيقات محترف متخصص في Flutter و React Native. أطوّر حلولاً رقمية فريدة لا تُنسى. +3 مشاريع مكتملة، +15 تقنية، 100% رضا العملاء."
         url="https://cv.3mcode-solutions.com/"
       />
       <div className="min-h-screen min-h-[100dvh] relative overflow-hidden safe-area-top">
@@ -107,7 +107,7 @@ const Index = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
               >
-                Akram Atiia
+                Mustafa Hussein
               </motion.h1>
               <motion.h2 
                 className="text-lg xs:text-xl md:text-2xl text-primary font-medium mb-2 sm:mb-4"
