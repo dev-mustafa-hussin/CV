@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import Footer from '@/components/Footer';
-import { Download, Mail, Phone, MapPin, Globe, Award, Briefcase, GraduationCap, Code, Star, Calendar, ExternalLink } from 'lucide-react';
+import { Download, Mail, Phone, MapPin, Globe, Award, Briefcase, GraduationCap, Code, Star, Calendar, ExternalLink, FolderOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ExperienceItem {
@@ -26,107 +26,123 @@ interface SkillCategory {
 const resumeData = {
   name: 'Mustafa Hussein Ahmed',
   nameAr: 'مصطفى حسين أحمد',
-  title: 'Full Stack Developer & ERP Consultant',
-  email: 'mustafa@example.com',
-  phone: '+20 123 456 7890',
-  location: 'القاهرة، مصر',
+  title: 'Senior Full-Stack Developer & Odoo ERP Specialist',
+  email: 'dev-mustafa-hussin@hotmail.com',
+  phone: '01225309785',
+  location: 'El Saf, Giza, Egypt',
   website: 'cv.3mcode-solutions.com',
-  summary: 'مطور ومستشار متخصص في أنظمة Odoo ERP وتطوير الويب المتكامل بخبرة +4 سنوات. أقدم خدمات تطوير وتخصيص Odoo، تدريب الفرق، تحليل الأعمال، وتنفيذ أنظمة ERP من البداية للتشغيل. خبرة شاملة في Python، React، PostgreSQL مع تركيز على جودة الحلول وتحقيق أهداف العملاء.',
+  summary: 'Senior Full-Stack Developer & Odoo ERP Specialist with 8+ years of enterprise experience, delivering end-to-end ERP and web solutions for SMEs in retail, real estate, and manufacturing. Specialized in designing ERP architectures, multi-tenant SaaS solutions, and deep Odoo customizations, with a strong focus on performance, scalability, and business process optimization. Proven track record of completing projects on time (98% on-time delivery) and generating measurable ROI through automation, integrations, and data-driven decision support.',
   experience: [
     {
-      title: 'Odoo ERP Consultant & Developer',
-      company: 'مستقل / Freelancer',
-      period: '2022 - الحالي',
+      title: 'Senior Full-Stack / Odoo ERP Developer',
+      company: '3M Code Software Solutions, Giza, Egypt',
+      period: 'January 2022 - Present',
       description: [
-        'تطوير وتخصيص +50 موديول Odoo مخصص',
-        'تنفيذ +10 مشاريع ERP كاملة من التحليل للتشغيل',
-        'تدريب +100 متدرب على استخدام وتطوير Odoo',
-        'تحقيق 100% نسبة نجاح في تسليم المشاريع',
+        'Odoo ERP: Expert in implementation and development for SMEs in retail, real estate, and manufacturing',
+        'ASP.NET Core & C#: Backend development and RESTful APIs for scalable enterprise systems',
+        'Frontend: React, Angular, Next.js for responsive and maintainable web applications',
+        'Databases: PostgreSQL, MySQL, SQL Server, MongoDB for data modeling and performance tuning',
+        'DevOps: Docker, CI/CD, Railway, Hostinger, n8n for automated deployments and integrations',
       ],
     },
     {
-      title: 'Full Stack Web Developer',
-      company: 'شركات متعددة',
-      period: '2021 - الحالي',
+      title: 'Full-Stack Developer / ERP Consultant',
+      company: 'Freelance Projects, Remote',
+      period: 'January 2018 - Present',
       description: [
-        'تطوير +30 تطبيق ويب باستخدام React و TypeScript',
-        'بناء APIs وخدمات Backend باستخدام Node.js و Python',
-        'تصميم وإدارة قواعد بيانات PostgreSQL و MySQL',
-        'تحسين أداء التطبيقات وتطبيق أفضل ممارسات الأمان',
-      ],
-    },
-    {
-      title: 'Business Analyst & ERP Implementation',
-      company: 'استشارات مستقلة',
-      period: '2021 - الحالي',
-      description: [
-        'تحليل متطلبات الأعمال وتوثيق العمليات',
-        'إدارة مشاريع تنفيذ أنظمة ERP',
-        'إعداد خطط نقل البيانات وتنفيذها',
-        'تدريب المستخدمين ودعم ما بعد التشغيل',
-      ],
-    },
-    {
-      title: 'مطور تطبيقات موبايل',
-      company: 'مشاريع متنوعة',
-      period: '2020 - 2022',
-      description: [
-        'تطوير تطبيقات Flutter متعددة المنصات',
-        'بناء تطبيقات E-commerce و Chat و Social Media',
-        'تكامل مع Firebase و Supabase للـ Backend',
+        'Led full-stack development of web applications using ASP.NET Core, C#, React, and SQL/MongoDB, ensuring scalable and maintainable architectures',
+        'Implemented and configured Odoo ERP for SMEs in retail, real estate, and manufacturing, aligning system workflows with business requirements',
+        'Designed and developed RESTful APIs and integrations between Odoo, third-party services, and in-house systems to streamline operations',
+        'Optimized database queries, indexing, and data models to improve performance, reporting accuracy, and decision-making',
+        'Collaborated with stakeholders to gather requirements, prioritize features, and deliver projects with a 98% on-time completion rate',
       ],
     },
   ] as ExperienceItem[],
   education: [
     {
-      degree: 'بكالوريوس علوم الحاسب',
-      institution: 'جامعة القاهرة',
-      period: '2017 - 2021',
+      degree: 'Industrial Secondary School (Three-Year System)',
+      institution: 'El Saf Industrial Secondary School, El Saf Giza',
+      period: 'December 2005 - 75%',
     },
   ] as EducationItem[],
   skills: [
     {
-      category: 'Odoo Development',
+      category: 'ERP & Business',
       skills: [
-        { name: 'Python', level: 95 },
-        { name: 'Odoo Framework', level: 98 },
-        { name: 'XML/QWeb', level: 92 },
+        { name: 'Odoo ERP Implementation', level: 98 },
+        { name: 'Workflow Automation', level: 95 },
+        { name: 'Business Process Analysis', level: 92 },
       ],
     },
     {
-      category: 'Full Stack Web',
+      category: 'Backend Development',
       skills: [
-        { name: 'React.js', level: 92 },
-        { name: 'TypeScript', level: 90 },
+        { name: 'ASP.NET Core (C#)', level: 95 },
         { name: 'Node.js', level: 88 },
+        { name: 'RESTful APIs', level: 95 },
       ],
     },
     {
-      category: 'قواعد البيانات',
+      category: 'Frontend Development',
       skills: [
-        { name: 'PostgreSQL', level: 92 },
-        { name: 'MySQL', level: 85 },
-        { name: 'Supabase', level: 90 },
+        { name: 'React', level: 92 },
+        { name: 'Angular', level: 85 },
+        { name: 'Next.js', level: 88 },
       ],
     },
     {
-      category: 'Business Analysis',
+      category: 'Databases',
       skills: [
-        { name: 'Requirements Analysis', level: 95 },
-        { name: 'Process Mapping', level: 92 },
-        { name: 'Project Management', level: 90 },
+        { name: 'PostgreSQL', level: 95 },
+        { name: 'MySQL', level: 90 },
+        { name: 'SQL Server', level: 88 },
+        { name: 'MongoDB', level: 85 },
+      ],
+    },
+    {
+      category: 'DevOps & Cloud',
+      skills: [
+        { name: 'Docker', level: 88 },
+        { name: 'CI/CD', level: 85 },
+        { name: 'n8n / Zapier / Make.com', level: 90 },
+      ],
+    },
+    {
+      category: 'Architecture & Practices',
+      skills: [
+        { name: 'SOLID Principles', level: 92 },
+        { name: 'Clean Architecture', level: 90 },
+        { name: 'Microservices', level: 85 },
       ],
     },
   ] as SkillCategory[],
   certifications: [
-    'Odoo Functional Certification',
-    'Odoo Technical Certification',
-    'Python Professional Certificate',
-    'Agile Project Management',
+    'Odoo Certified Professional Developer - Certified professional demonstrating expertise in Odoo ERP system implementation, customization, and module development across enterprise environments',
   ],
   languages: [
-    { name: 'العربية', level: 'اللغة الأم' },
-    { name: 'English', level: 'متقدم' },
+    { name: 'Arabic', level: 'Native' },
+    { name: 'English', level: 'Fluent' },
+  ],
+  projects: [
+    {
+      name: 'Wasalny – Online Food & Grocery Delivery Platform',
+      description: [
+        'Designed and implemented a responsive Arabic-first UI/UX for a food & grocery delivery platform with category-based filtering, search, promotions slider, and mobile-ready layout',
+        'Developed user account features including profile management, saved addresses, favorites, cart, and order history',
+        'Integrated marketing features such as promo codes (e.g., FIRST50), free-delivery thresholds, and weekend offers',
+        'Built support and legal sections (FAQ, Contact, Terms & Privacy) to make the platform production-ready',
+      ],
+    },
+    {
+      name: 'Hisabix ERP – Modular Accounting & Business Management System',
+      description: [
+        'Custom ERP solution focusing on financial accounting, inventory, sales, and purchasing workflows for SMEs',
+        'Designed and implemented core accounting modules (chart of accounts, journal entries, trial balance, and financial reports)',
+        'Developed inventory, sales, and purchasing flows with document lifecycle and stock movement tracking',
+        'Implemented role-based access control and multi-company/branch structure',
+        'Built configurable VAT/tax rules and automated posting of financial transactions',
+      ],
+    },
   ],
 };
 
@@ -260,6 +276,30 @@ const Resume = () => {
                     </p>
                   </div>
                 ))}
+              </section>
+
+              {/* Projects */}
+              <section>
+                <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+                  <FolderOpen className="w-5 h-5 text-primary" />
+                  المشاريع المميزة
+                </h2>
+                <div className="space-y-6">
+                  {resumeData.projects.map((project, index) => (
+                    <div key={index} className="relative pr-4 border-r-2 border-primary/30">
+                      <div className="absolute -right-2 top-0 w-4 h-4 rounded-full bg-primary" />
+                      <h3 className="font-semibold text-foreground mb-2">{project.name}</h3>
+                      <ul className="space-y-1">
+                        {project.description.map((item, i) => (
+                          <li key={i} className="text-muted-foreground text-sm flex items-start gap-2">
+                            <span className="text-primary mt-1">▸</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               </section>
             </div>
 
