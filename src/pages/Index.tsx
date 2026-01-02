@@ -8,7 +8,7 @@ import FadeIn from '@/components/animations/FadeIn';
 import ScaleIn from '@/components/animations/ScaleIn';
 import StaggerContainer, { StaggerItem } from '@/components/animations/StaggerContainer';
 import SEO from '@/components/SEO';
-import { Github, Linkedin, MessageCircle } from 'lucide-react';
+import { Github, Linkedin, Facebook, Instagram, MessageCircle } from 'lucide-react';
 
 const navItems = [
   { title: 'خدماتي', description: 'الباقات والأسعار', icon: 'service' as const, link: '/services' },
@@ -31,6 +31,18 @@ const socialLinks = [
     label: 'LinkedIn', 
     url: 'https://www.linkedin.com/in/mustafa-hussein-53228678/',
     color: 'hover:text-info'
+  },
+  { 
+    icon: Facebook, 
+    label: 'Facebook', 
+    url: 'https://www.facebook.com/mustafa.hussin.tech',
+    color: 'hover:text-info'
+  },
+  { 
+    icon: Instagram, 
+    label: 'Instagram', 
+    url: 'https://www.instagram.com/dev_mustafa_hussin/',
+    color: 'hover:text-pink-500'
   },
   { 
     icon: MessageCircle, 
