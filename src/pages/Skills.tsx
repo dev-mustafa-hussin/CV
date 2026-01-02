@@ -1,6 +1,7 @@
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import SEO from '@/components/SEO';
+import Footer from '@/components/Footer';
 import { Code, Smartphone, Database, Palette, Globe, Zap, Settings, BarChart3, Users, BookOpen } from 'lucide-react';
 
 const skills = [
@@ -161,6 +162,7 @@ const Skills = () => {
           ))}
         </div>
       </main>
+        <Footer />
       </div>
     </>
   );

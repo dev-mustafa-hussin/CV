@@ -1,5 +1,6 @@
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
+import Footer from '@/components/Footer';
 import { HelpCircle, ChevronDown, MessageCircle, Clock, DollarSign, Code, Smartphone, Globe, Shield, Zap } from 'lucide-react';
 import {
   Accordion,
@@ -213,6 +214,7 @@ const FAQ = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
