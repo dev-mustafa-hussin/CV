@@ -2,7 +2,7 @@ import { useState, useMemo, useRef } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import SEO from '@/components/SEO';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageCircle, Upload, X, FileText, Image, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Facebook, Instagram, MessageCircle, Upload, X, FileText, Image, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -287,15 +287,16 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: Mail, label: 'البريد الإلكتروني', value: 'mustafa@example.com' },
+    { icon: Mail, label: 'البريد الإلكتروني', value: 'dev-mustafa-hussin@hotmail.com' },
     { icon: Phone, label: 'رقم الهاتف', value: '+20 106 609 4050' },
     { icon: MapPin, label: 'الموقع', value: 'مصر' },
   ];
 
   const socialLinks = [
-    { icon: Github, label: 'GitHub', url: '#' },
-    { icon: Linkedin, label: 'LinkedIn', url: '#' },
-    { icon: Twitter, label: 'Twitter', url: '#' },
+    { icon: Github, label: 'GitHub', url: 'https://github.com/dev-mustafa-hussin' },
+    { icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/in/mustafa-hussein-53228678/' },
+    { icon: Facebook, label: 'Facebook', url: 'https://www.facebook.com/mustafa.hussin.tech' },
+    { icon: Instagram, label: 'Instagram', url: 'https://www.instagram.com/dev_mustafa_hussin/' },
   ];
 
   return (
