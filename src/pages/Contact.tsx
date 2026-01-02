@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import SEO from '@/components/SEO';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageCircle, Upload, X, FileText, Image } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -52,8 +52,29 @@ const preferredContact = [
   { id: 'phone', label: 'اتصال هاتفي' },
 ];
 
+const getGreeting = () => {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) {
+    return { text: 'صباح الخير', emoji: '☀️', period: 'morning' };
+  } else if (hour >= 12 && hour < 17) {
+    return { text: 'مساء الخير', emoji: '🌤️', period: 'afternoon' };
+  } else if (hour >= 17 && hour < 21) {
+    return { text: 'مساء الخير', emoji: '🌅', period: 'evening' };
+  } else {
+    return { text: 'مساء الخير', emoji: '🌙', period: 'night' };
+  }
+};
+
+interface UploadedFile {
+  file: File;
+  preview: string;
+  type: 'image' | 'document';
+}
+
 const Contact = () => {
   const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -67,7 +88,65 @@ const Contact = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  const greeting = useMemo(() => getGreeting(), []);
   const whatsappNumber = '2001066094050';
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    const maxFiles = 5;
+    const maxSize = 10 * 1024 * 1024; // 10MB
+
+    if (uploadedFiles.length + files.length > maxFiles) {
+      toast({
+        title: 'تنبيه ⚠️',
+        description: `يمكنك رفع ${maxFiles} ملفات كحد أقصى`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    Array.from(files).forEach((file) => {
+      if (file.size > maxSize) {
+        toast({
+          title: 'حجم الملف كبير جداً',
+          description: `الملف ${file.name} يتجاوز 10 ميجابايت`,
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      const isImage = file.type.startsWith('image/');
+      const reader = new FileReader();
+      
+      reader.onload = (event) => {
+        setUploadedFiles((prev) => [
+          ...prev,
+          {
+            file,
+            preview: event.target?.result as string,
+            type: isImage ? 'image' : 'document',
+          },
+        ]);
+      };
+      
+      if (isImage) {
+        reader.readAsDataURL(file);
+      } else {
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Reset input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setUploadedFiles((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -121,6 +200,9 @@ const Contact = () => {
     message += `• نوع الطلب: ${requestName}\n`;
     if (formData.budget) message += `• الميزانية: ${budgetName}\n`;
     if (formData.timeline) message += `• الجدول الزمني: ${timelineName}\n`;
+    if (uploadedFiles.length > 0) {
+      message += `• المرفقات: ${uploadedFiles.length} ملف (سأرسلها في رسالة منفصلة)\n`;
+    }
     message += `\n💬 الرسالة:\n${formData.message}`;
     
     return encodeURIComponent(message);
@@ -153,6 +235,7 @@ const Contact = () => {
       preferredContact: '',
       message: '',
     });
+    setUploadedFiles([]);
     setErrors({});
   };
 
@@ -199,8 +282,12 @@ const Contact = () => {
             <BackButton to="/" label="الرئيسية" />
           </div>
 
-          {/* Header */}
+          {/* Smart Greeting Header */}
           <div className="mb-12 animate-slide-right">
+            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-2 mb-4">
+              <span className="text-2xl">{greeting.emoji}</span>
+              <span className="text-primary font-medium">{greeting.text}</span>
+            </div>
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
               اتصل بي 📧
             </h1>
@@ -377,6 +464,70 @@ const Contact = () => {
                   </div>
                 </div>
 
+                {/* File Upload */}
+                <div className="space-y-2">
+                  <Label className="text-muted-foreground">
+                    مرفقات (صور أو مستندات)
+                  </Label>
+                  <div 
+                    className="border-2 border-dashed border-primary/30 rounded-xl p-6 text-center cursor-pointer hover:border-primary/50 hover:bg-primary/5 transition-all"
+                    onClick={() => fileInputRef.current?.click()}
+                  >
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      multiple
+                      accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                    <Upload className="w-10 h-10 text-primary/60 mx-auto mb-3" />
+                    <p className="text-muted-foreground text-sm">
+                      اضغط هنا لرفع ملفات (صور، PDF، Word، Excel)
+                    </p>
+                    <p className="text-muted-foreground/60 text-xs mt-1">
+                      الحد الأقصى: 5 ملفات، 10 ميجابايت لكل ملف
+                    </p>
+                  </div>
+                  
+                  {/* Uploaded Files Preview */}
+                  {uploadedFiles.length > 0 && (
+                    <div className="flex flex-wrap gap-3 mt-4">
+                      {uploadedFiles.map((file, index) => (
+                        <div 
+                          key={index} 
+                          className="relative group bg-secondary/30 rounded-lg p-2 border border-primary/20"
+                        >
+                          {file.type === 'image' ? (
+                            <img 
+                              src={file.preview} 
+                              alt={file.file.name}
+                              className="w-20 h-20 object-cover rounded"
+                            />
+                          ) : (
+                            <div className="w-20 h-20 flex flex-col items-center justify-center">
+                              <FileText className="w-8 h-8 text-primary" />
+                              <span className="text-xs text-muted-foreground mt-1 truncate max-w-full px-1">
+                                {file.file.name.split('.').pop()?.toUpperCase()}
+                              </span>
+                            </div>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => removeFile(index)}
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-destructive text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                          <p className="text-xs text-muted-foreground mt-1 truncate max-w-[80px]">
+                            {file.file.name}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 {/* Message */}
                 <div className="space-y-2">
                   <Label htmlFor="message" className="text-muted-foreground">
@@ -437,6 +588,29 @@ const Contact = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* Google Maps */}
+              <div className="card-glass p-6 animate-slide-up overflow-hidden" style={{ animationDelay: '0.4s' }}>
+                <h2 className="text-xl font-semibold text-foreground mb-4">
+                  الموقع 📍
+                </h2>
+                <div className="rounded-xl overflow-hidden border border-primary/20">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.5084239457813!2d31.23571841511692!3d30.04441918188379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840c26967a5b3%3A0x90fa3b9c8d8e9f6a!2sCairo%2C%20Egypt!5e0!3m2!1sen!2seg!4v1635000000000!5m2!1sen!2seg"
+                    width="100%"
+                    height="200"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="موقعي على الخريطة"
+                    className="grayscale hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
+                <p className="text-sm text-muted-foreground mt-3 text-center">
+                  القاهرة، مصر 🇪🇬
+                </p>
               </div>
 
               {/* Social Links */}
