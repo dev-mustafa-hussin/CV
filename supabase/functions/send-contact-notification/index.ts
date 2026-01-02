@@ -26,6 +26,105 @@ interface ContactFormData {
   message: string;
 }
 
+interface ValidationError {
+  field: string;
+  message: string;
+}
+
+// Escape HTML to prevent XSS in emails
+function escapeHtml(text: string): string {
+  if (!text) return '';
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// Server-side validation
+function validateContactForm(data: ContactFormData): ValidationError[] {
+  const errors: ValidationError[] = [];
+  
+  // Validate name
+  if (!data.name || typeof data.name !== 'string') {
+    errors.push({ field: 'name', message: 'الاسم مطلوب' });
+  } else if (data.name.trim().length < 2) {
+    errors.push({ field: 'name', message: 'الاسم يجب أن يكون أكثر من حرفين' });
+  } else if (data.name.length > 100) {
+    errors.push({ field: 'name', message: 'الاسم يجب أن يكون أقل من 100 حرف' });
+  } else if (data.name.includes('\n') || data.name.includes('\r')) {
+    errors.push({ field: 'name', message: 'الاسم يحتوي على أحرف غير صالحة' });
+  }
+  
+  // Validate email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!data.email || typeof data.email !== 'string') {
+    errors.push({ field: 'email', message: 'البريد الإلكتروني مطلوب' });
+  } else if (!emailRegex.test(data.email)) {
+    errors.push({ field: 'email', message: 'البريد الإلكتروني غير صحيح' });
+  } else if (data.email.length > 255) {
+    errors.push({ field: 'email', message: 'البريد الإلكتروني طويل جداً' });
+  } else if (data.email.includes('\n') || data.email.includes('\r')) {
+    errors.push({ field: 'email', message: 'البريد الإلكتروني يحتوي على أحرف غير صالحة' });
+  }
+  
+  // Validate whatsapp (optional but if provided, must be valid)
+  if (data.whatsapp && typeof data.whatsapp === 'string') {
+    const whatsappRegex = /^[0-9+\s-]{8,20}$/;
+    if (!whatsappRegex.test(data.whatsapp)) {
+      errors.push({ field: 'whatsapp', message: 'رقم الواتساب غير صحيح' });
+    }
+  }
+  
+  // Validate serviceType
+  const validServiceTypes = ['odoo-development', 'web-development', 'odoo-training', 'business-analysis'];
+  if (!data.serviceType || !validServiceTypes.includes(data.serviceType)) {
+    errors.push({ field: 'serviceType', message: 'نوع الخدمة غير صالح' });
+  }
+  
+  // Validate requestType
+  const validRequestTypes = ['inquiry', 'quote', 'consultation', 'modification'];
+  if (!data.requestType || !validRequestTypes.includes(data.requestType)) {
+    errors.push({ field: 'requestType', message: 'نوع الطلب غير صالح' });
+  }
+  
+  // Validate budget (optional)
+  if (data.budget) {
+    const validBudgets = ['less-5k', '5k-15k', '15k-30k', '30k-50k', 'more-50k', 'not-sure'];
+    if (!validBudgets.includes(data.budget)) {
+      errors.push({ field: 'budget', message: 'الميزانية غير صالحة' });
+    }
+  }
+  
+  // Validate timeline (optional)
+  if (data.timeline) {
+    const validTimelines = ['urgent', 'month', 'quarter', 'flexible'];
+    if (!validTimelines.includes(data.timeline)) {
+      errors.push({ field: 'timeline', message: 'الجدول الزمني غير صالح' });
+    }
+  }
+  
+  // Validate preferredContact (optional)
+  if (data.preferredContact) {
+    const validContacts = ['whatsapp', 'email', 'phone'];
+    if (!validContacts.includes(data.preferredContact)) {
+      errors.push({ field: 'preferredContact', message: 'طريقة التواصل غير صالحة' });
+    }
+  }
+  
+  // Validate message
+  if (!data.message || typeof data.message !== 'string') {
+    errors.push({ field: 'message', message: 'الرسالة مطلوبة' });
+  } else if (data.message.trim().length < 10) {
+    errors.push({ field: 'message', message: 'الرسالة يجب أن تكون أكثر من 10 أحرف' });
+  } else if (data.message.length > 5000) {
+    errors.push({ field: 'message', message: 'الرسالة طويلة جداً (الحد الأقصى 5000 حرف)' });
+  }
+  
+  return errors;
+}
+
 const serviceLabels: Record<string, string> = {
   'odoo-development': 'تطوير وتخصيص أودوو',
   'web-development': 'تطوير ويب متكامل',
@@ -72,28 +171,55 @@ const handler = async (req: Request): Promise<Response> => {
 
   try {
     const formData: ContactFormData = await req.json();
-    console.log("Form data received:", { ...formData, message: formData.message.substring(0, 50) + "..." });
+    console.log("Form data received:", { 
+      name: formData.name?.substring(0, 20), 
+      email: formData.email?.substring(0, 20),
+      serviceType: formData.serviceType,
+      requestType: formData.requestType 
+    });
 
-    const serviceName = serviceLabels[formData.serviceType] || formData.serviceType;
-    const requestName = requestLabels[formData.requestType] || formData.requestType;
-    const budgetName = formData.budget ? budgetLabels[formData.budget] || formData.budget : 'غير محدد';
-    const timelineName = formData.timeline ? timelineLabels[formData.timeline] || formData.timeline : 'غير محدد';
-    const contactMethod = formData.preferredContact ? contactLabels[formData.preferredContact] || formData.preferredContact : 'غير محدد';
+    // Server-side validation
+    const validationErrors = validateContactForm(formData);
+    if (validationErrors.length > 0) {
+      console.error("Validation errors:", validationErrors);
+      return new Response(
+        JSON.stringify({ 
+          error: 'فشل التحقق من البيانات', 
+          details: validationErrors 
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
 
-    // Save message to database
+    // Sanitize user inputs for HTML emails
+    const safeName = escapeHtml(formData.name.trim());
+    const safeEmail = escapeHtml(formData.email.trim());
+    const safeWhatsapp = formData.whatsapp ? escapeHtml(formData.whatsapp.trim()) : null;
+    const safeMessage = escapeHtml(formData.message.trim());
+
+    const serviceName = serviceLabels[formData.serviceType] || escapeHtml(formData.serviceType);
+    const requestName = requestLabels[formData.requestType] || escapeHtml(formData.requestType);
+    const budgetName = formData.budget ? budgetLabels[formData.budget] || escapeHtml(formData.budget) : 'غير محدد';
+    const timelineName = formData.timeline ? timelineLabels[formData.timeline] || escapeHtml(formData.timeline) : 'غير محدد';
+    const contactMethod = formData.preferredContact ? contactLabels[formData.preferredContact] || escapeHtml(formData.preferredContact) : 'غير محدد';
+
+    // Save message to database (use original trimmed values)
     console.log("Saving message to database...");
     const { data: savedMessage, error: dbError } = await supabase
       .from('contact_messages')
       .insert({
-        name: formData.name,
-        email: formData.email,
-        whatsapp: formData.whatsapp || null,
+        name: formData.name.trim().substring(0, 100),
+        email: formData.email.trim().substring(0, 255),
+        whatsapp: safeWhatsapp?.substring(0, 20) || null,
         service_type: formData.serviceType,
         request_type: formData.requestType,
         budget: formData.budget || null,
         timeline: formData.timeline || null,
         preferred_contact: formData.preferredContact || null,
-        message: formData.message,
+        message: formData.message.trim().substring(0, 5000),
         status: 'new'
       })
       .select()
@@ -105,7 +231,7 @@ const handler = async (req: Request): Promise<Response> => {
       console.log("Message saved to database:", savedMessage.id);
     }
 
-    // Email to the owner (notification)
+    // Email to the owner (notification) - using sanitized values
     const ownerEmailHtml = `
       <!DOCTYPE html>
       <html dir="rtl" lang="ar">
@@ -132,16 +258,16 @@ const handler = async (req: Request): Promise<Response> => {
           <div class="content">
             <div class="info-row">
               <span class="label">👤 الاسم:</span>
-              <span class="value">${formData.name}</span>
+              <span class="value">${safeName}</span>
             </div>
             <div class="info-row">
               <span class="label">📧 البريد:</span>
-              <span class="value">${formData.email}</span>
+              <span class="value">${safeEmail}</span>
             </div>
-            ${formData.whatsapp ? `
+            ${safeWhatsapp ? `
             <div class="info-row">
               <span class="label">📱 واتساب:</span>
-              <span class="value">${formData.whatsapp}</span>
+              <span class="value">${safeWhatsapp}</span>
             </div>
             ` : ''}
             <div class="info-row">
@@ -166,7 +292,7 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
             <div class="message-box">
               <strong>💬 الرسالة:</strong>
-              <p style="margin-top: 10px; white-space: pre-wrap;">${formData.message}</p>
+              <p style="margin-top: 10px; white-space: pre-wrap;">${safeMessage}</p>
             </div>
           </div>
           <div class="footer">
@@ -182,13 +308,13 @@ const handler = async (req: Request): Promise<Response> => {
     const ownerEmailResponse = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: ["dev-mustafa-hussin@hotmail.com"],
-      subject: `📩 رسالة جديدة من ${formData.name} - ${serviceName}`,
+      subject: `📩 رسالة جديدة من ${safeName} - ${serviceName}`,
       html: ownerEmailHtml,
     });
 
     console.log("Owner email sent:", ownerEmailResponse);
 
-    // Auto-reply email to the sender
+    // Auto-reply email to the sender - using sanitized values
     const autoReplyHtml = `
       <!DOCTYPE html>
       <html dir="rtl" lang="ar">
@@ -212,7 +338,7 @@ const handler = async (req: Request): Promise<Response> => {
             <h1>✅ تم استلام رسالتك بنجاح</h1>
           </div>
           <div class="content">
-            <p>مرحباً ${formData.name}،</p>
+            <p>مرحباً ${safeName}،</p>
             <p>شكراً لتواصلك معي! لقد استلمت رسالتك وسأقوم بالرد عليك في أقرب وقت ممكن.</p>
             
             <div class="highlight">
@@ -241,7 +367,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Sending auto-reply to sender...");
     const senderEmailResponse = await resend.emails.send({
       from: "Mustafa Hussein <onboarding@resend.dev>",
-      to: [formData.email],
+      to: [formData.email.trim()],
       subject: "✅ تم استلام رسالتك - سأتواصل معك قريباً",
       html: autoReplyHtml,
     });
