@@ -29,7 +29,7 @@ const socialLinks = [
   { 
     icon: Linkedin, 
     label: 'LinkedIn', 
-    url: 'https://linkedin.com/in/mustafa-hussein',
+    url: 'https://www.linkedin.com/in/mustafa-hussein-53228678/',
     color: 'hover:text-info'
   },
   { 
