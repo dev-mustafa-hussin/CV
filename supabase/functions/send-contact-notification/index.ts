@@ -151,7 +151,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Sending notification email to owner...");
     const ownerEmailResponse = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["mustafa@example.com"], // Change this to your actual email
+      to: ["dev-mustafa-hussin@hotmail.com"],
       subject: `📩 رسالة جديدة من ${formData.name} - ${serviceName}`,
       html: ownerEmailHtml,
     });
