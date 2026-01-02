@@ -274,7 +274,16 @@ const Contact = () => {
     }
     
     const message = generateWhatsAppMessage();
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+    
+    // Use anchor element to avoid iframe blocking
+    const link = document.createElement('a');
+    link.href = whatsappUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const contactInfo = [
