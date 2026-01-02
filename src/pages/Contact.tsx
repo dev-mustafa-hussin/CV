@@ -2,12 +2,13 @@ import { useState, useMemo, useRef } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import BackButton from '@/components/BackButton';
 import SEO from '@/components/SEO';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageCircle, Upload, X, FileText, Image } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageCircle, Upload, X, FileText, Image, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { supabase } from '@/integrations/supabase/client';
 import {
   Select,
   SelectContent,
@@ -75,6 +76,7 @@ const Contact = () => {
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -208,7 +210,7 @@ const Contact = () => {
     return encodeURIComponent(message);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -219,24 +221,46 @@ const Contact = () => {
       });
       return;
     }
+
+    setIsSubmitting(true);
     
-    toast({
-      title: 'تم إرسال الرسالة ✅',
-      description: 'سأتواصل معك في أقرب وقت ممكن',
-    });
-    setFormData({
-      name: '',
-      email: '',
-      whatsapp: '',
-      serviceType: '',
-      requestType: '',
-      budget: '',
-      timeline: '',
-      preferredContact: '',
-      message: '',
-    });
-    setUploadedFiles([]);
-    setErrors({});
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-notification', {
+        body: formData,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: 'تم إرسال الرسالة بنجاح ✅',
+        description: 'سأتواصل معك في أقرب وقت ممكن. تم إرسال تأكيد إلى بريدك الإلكتروني.',
+      });
+      
+      setFormData({
+        name: '',
+        email: '',
+        whatsapp: '',
+        serviceType: '',
+        requestType: '',
+        budget: '',
+        timeline: '',
+        preferredContact: '',
+        message: '',
+      });
+      setUploadedFiles([]);
+      setErrors({});
+    } catch (error: any) {
+      console.error('Error sending message:', error);
+      toast({
+        title: 'حدث خطأ ❌',
+        description: 'لم نتمكن من إرسال الرسالة. يرجى المحاولة مرة أخرى أو التواصل عبر الواتساب.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleWhatsAppSubmit = () => {
@@ -547,10 +571,20 @@ const Contact = () => {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     type="submit"
+                    disabled={isSubmitting}
                     className="flex-1 btn-primary flex items-center justify-center gap-2"
                   >
-                    <Send className="w-5 h-5" />
-                    <span>إرسال الرسالة</span>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>جاري الإرسال...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        <span>إرسال الرسالة</span>
+                      </>
+                    )}
                   </Button>
                   <Button
                     type="button"
