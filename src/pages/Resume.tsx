@@ -23,10 +23,10 @@ interface SkillCategory {
 }
 
 const resumeData = {
-  name: 'Akram Atiia',
-  nameAr: 'أكرم عطية',
+  name: 'Mustafa Hussein Ahmed',
+  nameAr: 'مصطفى حسين أحمد',
   title: 'Full Stack Developer & ERP Consultant',
-  email: 'akram@example.com',
+  email: 'mustafa@example.com',
   phone: '+20 123 456 7890',
   location: 'القاهرة، مصر',
   website: 'cv.3mcode-solutions.com',

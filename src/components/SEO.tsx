@@ -10,12 +10,12 @@ interface SEOProps {
 }
 
 const defaultMeta = {
-  title: 'Akram Atiia | مطور تطبيقات محترف',
-  description: 'أكرم عطية - مطور تطبيقات محترف متخصص في Flutter و React Native. أطوّر حلولاً رقمية فريدة لا تُنسى.',
+  title: 'Mustafa Hussein | مطور تطبيقات محترف',
+  description: 'مصطفى حسين أحمد - مطور تطبيقات محترف متخصص في Flutter و React Native. أطوّر حلولاً رقمية فريدة لا تُنسى.',
   image: 'https://cv.3mcode-solutions.com/assets/profile-vPlSWNaC.png',
   url: 'https://cv.3mcode-solutions.com',
   type: 'website',
-  keywords: 'مطور تطبيقات, Flutter Developer, Dart, تطوير موبايل, Akram Atiia, أكرم عطية',
+  keywords: 'مطور تطبيقات, Flutter Developer, Dart, تطوير موبايل, Mustafa Hussein, مصطفى حسين أحمد',
 };
 
 const SEO = ({
@@ -26,7 +26,7 @@ const SEO = ({
   type = defaultMeta.type,
   keywords = defaultMeta.keywords,
 }: SEOProps) => {
-  const fullTitle = title === defaultMeta.title ? title : `${title} | Akram Atiia`;
+  const fullTitle = title === defaultMeta.title ? title : `${title} | Mustafa Hussein`;
 
   return (
     <Helmet>
