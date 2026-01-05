@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
@@ -14,22 +15,86 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-interface ContactFormData {
-  name: string;
-  email: string;
-  whatsapp?: string;
-  serviceType: string;
-  requestType: string;
-  budget?: string;
-  timeline?: string;
-  preferredContact?: string;
-  message: string;
-}
+// Valid options for select fields
+const validServiceTypes = ['odoo-development', 'web-development', 'odoo-training', 'business-analysis'] as const;
+const validRequestTypes = ['inquiry', 'quote', 'consultation', 'modification'] as const;
+const validBudgets = ['less-5k', '5k-15k', '15k-30k', '30k-50k', 'more-50k', 'not-sure'] as const;
+const validTimelines = ['urgent', 'month', 'quarter', 'flexible'] as const;
+const validContacts = ['whatsapp', 'email', 'phone'] as const;
 
-interface ValidationError {
-  field: string;
-  message: string;
-}
+// Zod schema for contact form validation
+const ContactFormSchema = z.object({
+  name: z
+    .string({ required_error: 'الاسم مطلوب' })
+    .trim()
+    .min(2, { message: 'الاسم يجب أن يكون أكثر من حرفين' })
+    .max(100, { message: 'الاسم يجب أن يكون أقل من 100 حرف' })
+    .refine((val) => !val.includes('\n') && !val.includes('\r'), {
+      message: 'الاسم يحتوي على أحرف غير صالحة',
+    }),
+  
+  email: z
+    .string({ required_error: 'البريد الإلكتروني مطلوب' })
+    .trim()
+    .email({ message: 'البريد الإلكتروني غير صحيح' })
+    .max(255, { message: 'البريد الإلكتروني طويل جداً' })
+    .refine((val) => !val.includes('\n') && !val.includes('\r'), {
+      message: 'البريد الإلكتروني يحتوي على أحرف غير صالحة',
+    }),
+  
+  whatsapp: z
+    .string()
+    .trim()
+    .regex(/^[0-9+\s-]{8,20}$/, { message: 'رقم الواتساب غير صحيح' })
+    .optional()
+    .or(z.literal('')),
+  
+  serviceType: z
+    .enum(validServiceTypes, { 
+      errorMap: () => ({ message: 'نوع الخدمة غير صالح' }) 
+    }),
+  
+  requestType: z
+    .enum(validRequestTypes, { 
+      errorMap: () => ({ message: 'نوع الطلب غير صالح' }) 
+    }),
+  
+  budget: z
+    .enum(validBudgets, { 
+      errorMap: () => ({ message: 'الميزانية غير صالحة' }) 
+    })
+    .optional()
+    .or(z.literal('')),
+  
+  timeline: z
+    .enum(validTimelines, { 
+      errorMap: () => ({ message: 'الجدول الزمني غير صالح' }) 
+    })
+    .optional()
+    .or(z.literal('')),
+  
+  preferredContact: z
+    .enum(validContacts, { 
+      errorMap: () => ({ message: 'طريقة التواصل غير صالحة' }) 
+    })
+    .optional()
+    .or(z.literal('')),
+  
+  message: z
+    .string({ required_error: 'الرسالة مطلوبة' })
+    .trim()
+    .min(10, { message: 'الرسالة يجب أن تكون أكثر من 10 أحرف' })
+    .max(5000, { message: 'الرسالة طويلة جداً (الحد الأقصى 5000 حرف)' }),
+  
+  // Honeypot field - should always be empty
+  website: z
+    .string()
+    .max(0, { message: 'Spam detected' })
+    .optional()
+    .or(z.literal('')),
+});
+
+type ContactFormData = z.infer<typeof ContactFormSchema>;
 
 // Escape HTML to prevent XSS in emails
 function escapeHtml(text: string): string {
@@ -42,87 +107,12 @@ function escapeHtml(text: string): string {
     .replace(/'/g, '&#039;');
 }
 
-// Server-side validation
-function validateContactForm(data: ContactFormData): ValidationError[] {
-  const errors: ValidationError[] = [];
-  
-  // Validate name
-  if (!data.name || typeof data.name !== 'string') {
-    errors.push({ field: 'name', message: 'الاسم مطلوب' });
-  } else if (data.name.trim().length < 2) {
-    errors.push({ field: 'name', message: 'الاسم يجب أن يكون أكثر من حرفين' });
-  } else if (data.name.length > 100) {
-    errors.push({ field: 'name', message: 'الاسم يجب أن يكون أقل من 100 حرف' });
-  } else if (data.name.includes('\n') || data.name.includes('\r')) {
-    errors.push({ field: 'name', message: 'الاسم يحتوي على أحرف غير صالحة' });
-  }
-  
-  // Validate email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!data.email || typeof data.email !== 'string') {
-    errors.push({ field: 'email', message: 'البريد الإلكتروني مطلوب' });
-  } else if (!emailRegex.test(data.email)) {
-    errors.push({ field: 'email', message: 'البريد الإلكتروني غير صحيح' });
-  } else if (data.email.length > 255) {
-    errors.push({ field: 'email', message: 'البريد الإلكتروني طويل جداً' });
-  } else if (data.email.includes('\n') || data.email.includes('\r')) {
-    errors.push({ field: 'email', message: 'البريد الإلكتروني يحتوي على أحرف غير صالحة' });
-  }
-  
-  // Validate whatsapp (optional but if provided, must be valid)
-  if (data.whatsapp && typeof data.whatsapp === 'string') {
-    const whatsappRegex = /^[0-9+\s-]{8,20}$/;
-    if (!whatsappRegex.test(data.whatsapp)) {
-      errors.push({ field: 'whatsapp', message: 'رقم الواتساب غير صحيح' });
-    }
-  }
-  
-  // Validate serviceType
-  const validServiceTypes = ['odoo-development', 'web-development', 'odoo-training', 'business-analysis'];
-  if (!data.serviceType || !validServiceTypes.includes(data.serviceType)) {
-    errors.push({ field: 'serviceType', message: 'نوع الخدمة غير صالح' });
-  }
-  
-  // Validate requestType
-  const validRequestTypes = ['inquiry', 'quote', 'consultation', 'modification'];
-  if (!data.requestType || !validRequestTypes.includes(data.requestType)) {
-    errors.push({ field: 'requestType', message: 'نوع الطلب غير صالح' });
-  }
-  
-  // Validate budget (optional)
-  if (data.budget) {
-    const validBudgets = ['less-5k', '5k-15k', '15k-30k', '30k-50k', 'more-50k', 'not-sure'];
-    if (!validBudgets.includes(data.budget)) {
-      errors.push({ field: 'budget', message: 'الميزانية غير صالحة' });
-    }
-  }
-  
-  // Validate timeline (optional)
-  if (data.timeline) {
-    const validTimelines = ['urgent', 'month', 'quarter', 'flexible'];
-    if (!validTimelines.includes(data.timeline)) {
-      errors.push({ field: 'timeline', message: 'الجدول الزمني غير صالح' });
-    }
-  }
-  
-  // Validate preferredContact (optional)
-  if (data.preferredContact) {
-    const validContacts = ['whatsapp', 'email', 'phone'];
-    if (!validContacts.includes(data.preferredContact)) {
-      errors.push({ field: 'preferredContact', message: 'طريقة التواصل غير صالحة' });
-    }
-  }
-  
-  // Validate message
-  if (!data.message || typeof data.message !== 'string') {
-    errors.push({ field: 'message', message: 'الرسالة مطلوبة' });
-  } else if (data.message.trim().length < 10) {
-    errors.push({ field: 'message', message: 'الرسالة يجب أن تكون أكثر من 10 أحرف' });
-  } else if (data.message.length > 5000) {
-    errors.push({ field: 'message', message: 'الرسالة طويلة جداً (الحد الأقصى 5000 حرف)' });
-  }
-  
-  return errors;
+// Format Zod errors for client response
+function formatZodErrors(error: z.ZodError): { field: string; message: string }[] {
+  return error.errors.map((err) => ({
+    field: err.path.join('.') || 'unknown',
+    message: err.message,
+  }));
 }
 
 const serviceLabels: Record<string, string> = {
@@ -221,10 +211,10 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    const formData = await req.json();
+    const rawFormData = await req.json();
     
     // Check for spam bots via honeypot
-    if (isSpamBot(formData)) {
+    if (isSpamBot(rawFormData)) {
       // Return success to fool the bot, but don't process
       return new Response(
         JSON.stringify({ success: true, message: "تم إرسال الرسالة بنجاح" }),
@@ -236,15 +226,16 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     console.log("Form data received:", { 
-      name: formData.name?.substring(0, 20), 
-      email: formData.email?.substring(0, 20),
-      serviceType: formData.serviceType,
-      requestType: formData.requestType 
+      name: rawFormData.name?.substring(0, 20), 
+      email: rawFormData.email?.substring(0, 20),
+      serviceType: rawFormData.serviceType,
+      requestType: rawFormData.requestType 
     });
 
-    // Server-side validation
-    const validationErrors = validateContactForm(formData);
-    if (validationErrors.length > 0) {
+    // Server-side validation using Zod
+    const validationResult = ContactFormSchema.safeParse(rawFormData);
+    if (!validationResult.success) {
+      const validationErrors = formatZodErrors(validationResult.error);
       console.error("Validation errors:", validationErrors);
       return new Response(
         JSON.stringify({ 
@@ -257,6 +248,9 @@ const handler = async (req: Request): Promise<Response> => {
         }
       );
     }
+
+    // Use validated and sanitized data
+    const formData = validationResult.data;
 
     // Sanitize user inputs for HTML emails
     const safeName = escapeHtml(formData.name.trim());
