@@ -88,6 +88,8 @@ const Contact = () => {
     timeline: '',
     preferredContact: '',
     message: '',
+    // Honeypot field for bot protection (should remain empty)
+    website: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -249,6 +251,7 @@ const Contact = () => {
         timeline: '',
         preferredContact: '',
         message: '',
+        website: '',
       });
       setUploadedFiles([]);
       setErrors({});
@@ -338,6 +341,22 @@ const Contact = () => {
                 أرسل رسالة 💬
               </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot field - hidden from humans, bots will fill it */}
+                <div className="absolute -left-[9999px] opacity-0 pointer-events-none" aria-hidden="true">
+                  <Label htmlFor="website" className="sr-only">
+                    لا تملأ هذا الحقل
+                  </Label>
+                  <Input
+                    id="website"
+                    name="website"
+                    type="text"
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 {/* Row 1: Name & Email */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
