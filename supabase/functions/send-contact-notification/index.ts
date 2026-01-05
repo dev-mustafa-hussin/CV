@@ -161,6 +161,38 @@ const contactLabels: Record<string, string> = {
   'phone': 'اتصال هاتفي',
 };
 
+// Simple in-memory rate limiting (resets on function cold start)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_MAX = 5; // Max requests per window
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
+
+function isRateLimited(clientIp: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(clientIp);
+  
+  if (!record || now > record.resetTime) {
+    rateLimitMap.set(clientIp, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return false;
+  }
+  
+  if (record.count >= RATE_LIMIT_MAX) {
+    return true;
+  }
+  
+  record.count++;
+  return false;
+}
+
+// Check for honeypot field (bots typically fill hidden fields)
+function isSpamBot(data: any): boolean {
+  // If honeypot field is filled, it's likely a bot
+  if (data.website || data.url || data.honeypot) {
+    console.log("Spam bot detected via honeypot field");
+    return true;
+  }
+  return false;
+}
+
 const handler = async (req: Request): Promise<Response> => {
   console.log("Received request to send-contact-notification");
 
@@ -170,7 +202,39 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const formData: ContactFormData = await req.json();
+    // Get client IP for rate limiting
+    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 
+                     req.headers.get('x-real-ip') || 
+                     'unknown';
+    
+    // Check rate limit
+    if (isRateLimited(clientIp)) {
+      console.warn(`Rate limit exceeded for IP: ${clientIp.substring(0, 10)}...`);
+      return new Response(
+        JSON.stringify({ 
+          error: 'تم تجاوز الحد المسموح من الطلبات. يرجى المحاولة لاحقاً.' 
+        }),
+        {
+          status: 429,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    const formData = await req.json();
+    
+    // Check for spam bots via honeypot
+    if (isSpamBot(formData)) {
+      // Return success to fool the bot, but don't process
+      return new Response(
+        JSON.stringify({ success: true, message: "تم إرسال الرسالة بنجاح" }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
     console.log("Form data received:", { 
       name: formData.name?.substring(0, 20), 
       email: formData.email?.substring(0, 20),
@@ -377,9 +441,7 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: "تم إرسال الرسالة بنجاح",
-        ownerEmail: ownerEmailResponse,
-        senderEmail: senderEmailResponse 
+        message: "تم إرسال الرسالة بنجاح"
       }),
       {
         status: 200,
@@ -387,9 +449,20 @@ const handler = async (req: Request): Promise<Response> => {
       }
     );
   } catch (error: any) {
-    console.error("Error in send-contact-notification:", error);
+    // Log full error details server-side for debugging
+    console.error("Error in send-contact-notification:", {
+      message: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString(),
+      type: error.constructor?.name
+    });
+    
+    // Return safe, generic error to client (don't expose internal details)
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ 
+        error: 'حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.',
+        support: 'إذا استمرت المشكلة، تواصل معنا مباشرة عبر البريد الإلكتروني'
+      }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
