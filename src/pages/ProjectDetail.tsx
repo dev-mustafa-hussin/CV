@@ -144,18 +144,31 @@ const ProjectDetail = () => {
                 {project.category}
               </span>
               
-              {/* Live Demo Button */}
-              {project.videoUrl && (
-                <a
-                  href={project.videoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
-                >
-                  <ExternalLink className="w-5 h-5" />
-                  <span>تجربة مباشرة</span>
-                </a>
-              )}
+              {/* External Links */}
+              <div className="flex flex-wrap gap-3 mt-2">
+                {project.videoUrl && (
+                  <a
+                    href={project.videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    <span>تجربة مباشرة</span>
+                  </a>
+                )}
+                {project.externalUrl && (
+                  <a
+                    href={project.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-info hover:bg-info/90 text-info-foreground px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-info/30"
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    <span>عرض على المتجر</span>
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>
