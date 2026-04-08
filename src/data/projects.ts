@@ -45,6 +45,7 @@ export interface Project {
   challenges?: string[];
   solutions?: string[];
   videoUrl?: string;
+  externalUrl?: string;
 }
 
 export const projects: Project[] = [
