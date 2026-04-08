@@ -927,6 +927,7 @@ export const projects: Project[] = [
     description: 'نظام متكامل لإدارة المدارس والمؤسسات التعليمية مبني على Odoo 19، يشمل 8 وحدات مترابطة لأتمتة جميع العمليات الأكاديمية والإدارية والمالية.',
     fullDescription: 'نظام إدارة المدارس والمؤسسات التعليمية (Educational ERP) هو حل برمجي متكامل مبني على بيئة Odoo 19، يهدف لأتمتة وتسهيل جميع العمليات الأكاديمية والإدارية والمالية. يتكون من مجموعة من الوحدات (Modules) المترابطة باحترافية، حيث يمكّن المؤسسات من اختيار وتشغيل ما يناسبها من أدوات بكل مرونة. تم تطويره بواسطة 3M Code Software ونُشر على متجر Odoo Apps الرسمي.',
     icon: 'education',
+    externalUrl: 'https://apps.odoo.com/apps/browse?repo_maintainer_id=1155824',
     stats: [
       { icon: 'code', value: '8', label: 'وحدة برمجية' },
       { icon: 'building', value: 'Odoo 19', label: 'متوافق مع' },
