@@ -29,6 +29,10 @@ import wasalnyScreenshot from '@/assets/projects/wasalny-screenshot.png';
 import wasalnyPizza from '@/assets/projects/wasalny-pizza.png';
 import wasalnyBurger from '@/assets/projects/wasalny-burger.png';
 import wasalnyShawarma from '@/assets/projects/wasalny-shawarma.png';
+import schoolErpAcademic from '@/assets/projects/school-erp-academic.jpg';
+import schoolErpFees from '@/assets/projects/school-erp-fees.jpg';
+import schoolErpAttendance from '@/assets/projects/school-erp-attendance.jpg';
+import schoolErpGrades from '@/assets/projects/school-erp-grades.jpg';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   shopping: ShoppingBag,
@@ -68,6 +72,7 @@ const screenshotMap: Record<string, string> = {
   travel: travelScreenshot,
   wallet: walletScreenshot,
   wasalny: wasalnyScreenshot,
+  'school-erp': schoolErpAcademic,
 };
 
 const galleryMap: Record<string, string[]> = {
@@ -81,6 +86,7 @@ const galleryMap: Record<string, string[]> = {
   travel: [travelScreenshot],
   wallet: [walletScreenshot],
   wasalny: [wasalnyScreenshot, wasalnyPizza, wasalnyBurger, wasalnyShawarma],
+  'school-erp': [schoolErpAcademic, schoolErpFees, schoolErpAttendance, schoolErpGrades],
 };
 
 const ProjectDetail = () => {
