@@ -72,6 +72,7 @@ const screenshotMap: Record<string, string> = {
   travel: travelScreenshot,
   wallet: walletScreenshot,
   wasalny: wasalnyScreenshot,
+  'school-erp': schoolErpAcademic,
 };
 
 const galleryMap: Record<string, string[]> = {
@@ -85,6 +86,7 @@ const galleryMap: Record<string, string[]> = {
   travel: [travelScreenshot],
   wallet: [walletScreenshot],
   wasalny: [wasalnyScreenshot, wasalnyPizza, wasalnyBurger, wasalnyShawarma],
+  'school-erp': [schoolErpAcademic, schoolErpFees, schoolErpAttendance, schoolErpGrades],
 };
 
 const ProjectDetail = () => {
