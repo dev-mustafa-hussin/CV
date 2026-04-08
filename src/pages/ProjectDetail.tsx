@@ -168,6 +168,7 @@ const ProjectDetail = () => {
                     <span>عرض على المتجر</span>
                   </a>
                 )}
+              </div>
             </div>
           </div>
         </div>
