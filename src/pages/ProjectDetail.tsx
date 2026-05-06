@@ -34,6 +34,14 @@ import schoolErpFees from '@/assets/projects/school-erp-fees.jpg';
 import schoolErpAttendance from '@/assets/projects/school-erp-attendance.jpg';
 import schoolErpGrades from '@/assets/projects/school-erp-grades.jpg';
 
+// Import Odoo Development screenshots
+import odooMainDashboard from '@/assets/projects/odoo-development/main-dashboard.png';
+import odooCategories from '@/assets/projects/odoo-development/categories-structure-overview.png';
+import odooMainCategory from '@/assets/projects/odoo-development/main-category-valuation-fifo.png';
+import odooSubcategory from '@/assets/projects/odoo-development/subcategory-accounting-mapping.png';
+import odooVariants from '@/assets/projects/odoo-development/fashion-product-variants1.png';
+import odooUsers from '@/assets/projects/odoo-development/users-management.png';
+
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   shopping: ShoppingBag,
   chat: MessageCircle,
@@ -73,6 +81,7 @@ const screenshotMap: Record<string, string> = {
   wallet: walletScreenshot,
   wasalny: wasalnyScreenshot,
   'school-erp': schoolErpAcademic,
+  'odoo-development': odooMainDashboard,
 };
 
 const galleryMap: Record<string, string[]> = {
@@ -87,6 +96,7 @@ const galleryMap: Record<string, string[]> = {
   wallet: [walletScreenshot],
   wasalny: [wasalnyScreenshot, wasalnyPizza, wasalnyBurger, wasalnyShawarma],
   'school-erp': [schoolErpAcademic, schoolErpFees, schoolErpAttendance, schoolErpGrades],
+  'odoo-development': [odooMainDashboard, odooCategories, odooMainCategory, odooSubcategory, odooVariants, odooUsers],
 };
 
 const ProjectDetail = () => {
