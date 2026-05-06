@@ -127,13 +127,22 @@ const ProjectDetail = () => {
           <div className="flex flex-col lg:flex-row-reverse items-center gap-8">
             {/* Screenshot */}
             <div className="relative w-48 md:w-56 lg:w-64 flex-shrink-0">
-              <div className="relative rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20">
-                <img 
-                  src={screenshot} 
-                  alt={project.titleAr}
-                  className="w-full h-auto object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent" />
+              <div className="relative rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl shadow-primary/20 aspect-square flex items-center justify-center bg-secondary/50">
+                {screenshot ? (
+                  <>
+                    <img 
+                      src={screenshot} 
+                      alt={project.titleAr}
+                      className="w-full h-full object-cover absolute inset-0"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent pointer-events-none" />
+                  </>
+                ) : (
+                  <div className="flex flex-col items-center justify-center p-6 text-center w-full h-full">
+                    <Images className="w-12 h-12 text-primary/40 mb-2" />
+                    <span className="text-sm text-muted-foreground font-medium">صورة قريباً</span>
+                  </div>
+                )}
               </div>
               {/* Icon badge */}
               <div className="absolute -bottom-3 -right-3 w-14 h-14 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center glow-border">
@@ -408,12 +417,12 @@ const ProjectDetail = () => {
         )}
 
         {/* Gallery Section */}
-        {gallery.length > 0 && (
-          <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.95s' }}>
-            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
-              <Images className="w-6 h-6 text-primary" />
-              <span>معرض الصور</span>
-            </h2>
+        <section className="card-glass p-6 mb-8 animate-slide-up" style={{ animationDelay: '0.95s' }}>
+          <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
+            <Images className="w-6 h-6 text-primary" />
+            <span>معرض الصور</span>
+          </h2>
+          {gallery.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {gallery.map((img, index) => (
                 <div
@@ -435,16 +444,22 @@ const ProjectDetail = () => {
                 </div>
               ))}
             </div>
-          </section>
-        )}
+          ) : (
+            <div className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-primary/20 rounded-2xl bg-primary/5">
+              <Images className="w-12 h-12 text-primary/40 mb-3" />
+              <p className="text-lg font-medium text-foreground">سيتم إضافة صور المشروع قريباً</p>
+              <p className="text-sm text-muted-foreground mt-1">نعمل على تجهيز أفضل اللقطات لعرضها هنا</p>
+            </div>
+          )}
+        </section>
 
         {/* Video/Live Preview Section */}
-        {project.videoUrl && (
-          <section className="card-glass p-6 animate-slide-up" style={{ animationDelay: '1s' }}>
-            <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
-              <Video className="w-6 h-6 text-primary" />
-              <span>معاينة حية للمشروع</span>
-            </h2>
+        <section className="card-glass p-6 animate-slide-up" style={{ animationDelay: '1s' }}>
+          <h2 className="text-xl font-semibold text-foreground mb-6 flex items-center gap-2">
+            <Video className="w-6 h-6 text-primary" />
+            <span>معاينة حية للمشروع</span>
+          </h2>
+          {project.videoUrl ? (
             <div className="bg-card/50 rounded-2xl border border-border/30 overflow-hidden">
               {project.videoUrl.includes('youtube.com') || project.videoUrl.includes('youtu.be') ? (
                 <div className="aspect-video">
@@ -492,8 +507,14 @@ const ProjectDetail = () => {
                 </div>
               )}
             </div>
-          </section>
-        )}
+          ) : (
+            <div className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-primary/20 rounded-2xl bg-primary/5">
+              <Video className="w-12 h-12 text-primary/40 mb-3" />
+              <p className="text-lg font-medium text-foreground">سيتم إضافة فيديو توضيحي قريباً</p>
+              <p className="text-sm text-muted-foreground mt-1">نعمل على تجهيز فيديو يوضح مميزات المشروع</p>
+            </div>
+          )}
+        </section>
       </main>
 
       {/* Lightbox Modal */}
